@@ -1,6 +1,8 @@
 {
   "name": "head-to-head",
-  "version": "1.0.0",
+  "description": "Compare in depth NBA player head to head stats seamlessly",
+  "author": "Trent Davis",
+  "version": "1.0.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -21,7 +23,7 @@
     "@angular/router": "~12.2.0",
     "@ng-bootstrap/ng-bootstrap": "^11.0.0-beta.2",
     "axios": "^0.21.1",
-    "bootstrap": "^4.5.0",
+    "bootstrap": "^5.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
