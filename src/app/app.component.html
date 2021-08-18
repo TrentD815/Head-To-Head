@@ -1,5 +1,14 @@
 <body class="bg-light raised">
-
+<!--  <top-bar/>
+      <players>
+          <player-profile/>
+          <player-profile/>
+       </players>
+       <stats>
+          <player-stats/>
+          <player-stats/>
+       </stats>
+-->
   <nav class="navbar navbar-expand-lg navbar-light container-fluid">
       <a class="navbar-brand" href="#">Head To Head</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +21,7 @@
           </li>
         </ul>
       </div>
-      <div class="darkModeContainer">
+      <div class="light-or-dark-mode-container">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="yellow" class="bi bi-brightness-high m-2" viewBox="0 0 16 16">
           <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
         </svg>
@@ -26,23 +35,25 @@
   </nav>
 
   <div class="players justify-content-center justify-content-around row">
-    <div class="player col mx-lg-5">
-      <div class="card-light raised">
-        <div class="card-header">
-          <h3>Lebron James</h3>
-          <img src="assets/LebronJames.png">
-        </div>
-        <div class="card-body">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item bg-transparent border-bottom px-0">Power Forward</li>
-            <li class="list-group-item bg-transparent border-bottom px-0">Los Angeles Lakers</li>
-          </ul>
-        </div>
-      </div>
-      <form class="d-flex">
-        <input class="form-control my-3 raised card-light rounded" type="search" placeholder="Search player..." aria-label="Search">
-      </form>
-    </div>
+    <player-profile></player-profile>
+<!--    <player-profile player="2"></player-profile>-->
+<!--    <div class="player col mx-lg-5">-->
+<!--      <div class="card-light raised">-->
+<!--        <div class="card-header">-->
+<!--          <h3>Lebron James</h3>-->
+<!--          <img src="assets/LebronJames.png">-->
+<!--        </div>-->
+<!--        <div class="card-body">-->
+<!--          <ul class="list-group list-group-flush">-->
+<!--            <li class="list-group-item bg-transparent border-bottom px-0">Power Forward</li>-->
+<!--            <li class="list-group-item bg-transparent border-bottom px-0">Los Angeles Lakers</li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <form class="d-flex">-->
+<!--        <input class="form-control my-3 raised card-light rounded" type="search" placeholder="Search player..." aria-label="Search">-->
+<!--      </form>-->
+<!--    </div>-->
 
    <div class="player col mx-lg-5">
      <div class="card-light raised">
@@ -63,15 +74,26 @@
    </div>
   </div>
   <hr/>
-  <div class="stats justify-content-center justify-content-around row">
-    <div class="player-stats stats-right col stat-loser">
+  <div class="stats justify-content-center justify-content-around row my-2">
+    <div class="player-stats stats-right col stat-loser mx-xl-5 raised">
       25.0
     </div>
-    <div class="stat-name col-2">
+    <div class="stat-name col-1">
       Points
     </div>
-    <div class="player-stats stats-left col stat-winner">
+    <div class="player-stats stats-left col stat-winner mx-xl-5 raised">
       28.1
+    </div>
+  </div>
+  <div class="stats justify-content-center justify-content-around row my-2">
+    <div class="player-stats stats-right col stat-winner mx-xl-5 raised">
+      7.8
+    </div>
+    <div class="stat-name col-1">
+      Assists
+    </div>
+    <div class="player-stats stats-left col stat-loser mx-xl-5 raised">
+      5.9
     </div>
   </div>
 </body>

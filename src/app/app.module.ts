@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PlayerComparisonComponent } from './player-comparison/player-comparison.component';
+import { PlayerProfileComponent } from './player-profile/player-profile.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    PlayerComparisonComponent
+    PlayerProfileComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

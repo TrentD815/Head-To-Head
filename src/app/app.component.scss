@@ -21,8 +21,10 @@ body {
 .bg-light {
   background-color: #50E3C2 !important;
   background-image:
-    radial-gradient(at 47% 33%, hsl(162.00, 77%, 40%) 0, transparent 59%),
-    radial-gradient(at 82% 65%, hsl(198.00, 100%, 50%) 0, transparent 55%);
+    //radial-gradient(at 47% 33%, hsl(162.00, 77%, 40%) 0, transparent 59%),
+    //radial-gradient(at 82% 65%, hsl(198.00, 100%, 50%) 0, transparent 55%);
+    linear-gradient(0.25turn, yellow,mix(yellow,green), green);
+
 }
 .bg-rainbow {
   background: url("https://i.imgur.com/4MuY3MR.png") no-repeat fixed;
@@ -64,7 +66,7 @@ body {
   width: 3em;
   height: 1.5em;
 }
-.darkModeContainer {
+.light-or-dark-mode-container {
   display: inline-flex;
 }
 .verticalLine {
@@ -75,7 +77,7 @@ body {
   border-radius: 2em !important;
 }
 .stats {
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 .stat-name {
   text-align: center;
@@ -88,7 +90,9 @@ body {
 }
 .stat-loser {
   background-color: lightcoral;
+  border-radius: 1em;
 }
 .stat-winner {
   background-color:lightgreen;
+  border-radius: 1em;
 }

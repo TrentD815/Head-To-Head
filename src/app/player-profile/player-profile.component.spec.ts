@@ -1,20 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlayerComparisonComponent } from './player-comparison.component';
 
-describe('PlayerComparisonComponent', () => {
-  let component: PlayerComparisonComponent;
-  let fixture: ComponentFixture<PlayerComparisonComponent>;
+import { PlayerProfileComponent } from './player-profile.component';
+
+describe('PlayerProfileComponent', () => {
+  let component: PlayerProfileComponent;
+  let fixture: ComponentFixture<PlayerProfileComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PlayerComparisonComponent ]
+      declarations: [ PlayerProfileComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PlayerComparisonComponent);
+    fixture = TestBed.createComponent(PlayerProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
