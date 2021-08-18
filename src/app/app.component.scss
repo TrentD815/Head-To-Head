@@ -2,7 +2,7 @@ body {
   background-size: cover;
   height: 100vh;
   font-family: "Roboto", sans-serif;
-  color: #fff;
+  color: black;
 }
 .players{
   display: flex;
@@ -21,9 +21,9 @@ body {
 .bg-light {
   background-color: #50E3C2 !important;
   background-image:
-    //radial-gradient(at 47% 33%, hsl(162.00, 77%, 40%) 0, transparent 59%),
-    //radial-gradient(at 82% 65%, hsl(198.00, 100%, 50%) 0, transparent 55%);
-    linear-gradient(0.25turn, yellow,mix(yellow,green), green);
+    radial-gradient(at 47% 33%, hsl(162.00, 77%, 40%) 0, transparent 59%),
+    radial-gradient(at 82% 65%, hsl(198.00, 100%, 50%) 0, transparent 55%);
+    //linear-gradient(0.25turn, yellow,mix(yellow,green), green);
 
 }
 .bg-rainbow {
@@ -50,6 +50,7 @@ body {
     alignment: center;
   }
 }
+
 .card-header {
   text-align: center;
 }
@@ -89,10 +90,15 @@ body {
   text-align: right;
 }
 .stat-loser {
-  background-color: lightcoral;
+  background-color: #f9c1b1;
+  background-image: linear-gradient(315deg, #f9c1b1 0%, #fb8085 74%);
+
   border-radius: 1em;
 }
 .stat-winner {
-  background-color:lightgreen;
   border-radius: 1em;
+  background-color: #7cffcb;
+  background-image: linear-gradient(315deg, #7cffcb 0%, #74f2ce 74%);
+
+
 }

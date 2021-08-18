@@ -6,4 +6,5 @@ export interface PlayerProfile {
   weight ?: number;
   height ?: string;
   position ?: string;
+  number ?: number;
 }

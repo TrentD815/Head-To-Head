@@ -1,20 +1,18 @@
-<div class="player col mx-lg-5">
+<div class="player mx-lg-5">
   <div class="card-light raised">
     <div class="card-header">
-      <h3>{{player1.name}}</h3>
-      <img src="{{player1.profilePicSource}}">
+      <h3>{{player?.name}}</h3>
+      <img src="{{player?.profilePicSource}}">
     </div>
     <div class="card-body">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item bg-transparent border-bottom px-0">{{player1.position}}</li>
         <li class="list-group-item bg-transparent border-bottom px-0">
-          <span>
-            <img height="32" width="32" src="{{player1.teamLogoSource}}">
-          </span>
-          {{player1.team}}
+          <span><img height="32" width="32" src="{{player?.teamLogoSource}}"></span>
+          {{player?.team}}
         </li>
-        <li class="list-group-item bg-transparent border-bottom px-0">Weight: {{player1.weight}} lbs</li>
-        <li class="list-group-item bg-transparent border-bottom px-0">Height: {{player1.height}}"</li>
+        <li class="list-group-item bg-transparent border-bottom px-0">{{player?.position}} (#{{player?.number}})</li>
+        <li class="list-group-item bg-transparent border-bottom px-0">Weight: {{player?.weight}} lbs</li>
+        <li class="list-group-item bg-transparent border-bottom px-0">Height: {{player?.height}}"</li>
       </ul>
     </div>
   </div>
