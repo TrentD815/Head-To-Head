@@ -1,14 +1,4 @@
 <body class="bg-light raised">
-<!--  <top-bar/>
-      <players>
-          <player-profile/>
-          <player-profile/>
-       </players>
-       <stats>
-          <player-stats/>
-          <player-stats/>
-       </stats>
--->
   <nav-bar></nav-bar>
   <div class="players row">
       <player-profile class="col" playerIdentity="1"></player-profile>
@@ -18,7 +8,7 @@
   <div class="stats row my-2 mx-lg-5">
       <div class="card-light raised col">
           <div class="card-header mb-0">
-            <h4>Stats</h4>
+            <h4>Basic Head To Head Stats</h4>
           </div>
           <div class="card-body>">
               <ul class="list-group list-group-flush">
@@ -26,8 +16,16 @@
               </ul>
           </div>
       </div>
-    <div class="col">
-      hello
+      <div class="col-1" ></div>
+      <div class="card-light raised col">
+        <div class="card-header mb-0">
+          <h4>Advanced Head To Head Stats</h4>
+        </div>
+        <div class="card-body>">
+          <ul class="list-group list-group-flush">
+            <player-stats class="col"></player-stats>
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
 </body>

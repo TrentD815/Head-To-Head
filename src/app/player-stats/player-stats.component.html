@@ -1,35 +1,106 @@
-<!--{{playerStats?.averageRebounds}}-->
-<!--{{playerStats?.averageAssists}}-->
-<!--{{playerStats?.averageBlocks}}-->
-<!--{{playerStats?.averageSteals}}-->
-<!--{{playerStats?.plusMinus}}-->
 <li class="list-group-item bg-transparent px-0">
-    <div class="row py-1 mx-lg-5">
+  <div class="row py-1 mx-lg-5 align-items-center">
+    <div class="col stat-loser rounded end">{{player1Stats?.gamesPlayed}}</div>
+    <div class="col-3 center">Games Played</div>
+    <div class="col stat-winner rounded start">{{player2Stats?.gamesPlayed}}</div>
+  </div>
+  <div class="row py-1 mx-lg-5 align-items-center">
+    <div class="col stat-loser rounded end">{{player1Stats?.averageMinutesPlayed}}</div>
+    <div class="col-3 center">Minutes</div>
+    <div class="col stat-winner rounded start">{{player2Stats?.averageMinutesPlayed}}</div>
+  </div>
+
+    <div class="row py-1 mx-lg-5 align-items-center">
         <div class="col stat-loser rounded end">{{player1Stats?.averagePoints}}</div>
-        <div class="col-3 center">Average Points</div>
+        <div class="col-3 center">Points</div>
         <div class="col stat-winner rounded start">{{player2Stats?.averagePoints}}</div>
     </div>
-  <div class="row py-1 mx-lg-5">
+  <div class="row py-1 mx-lg-5 align-items-center">
       <div class="col  stat-loser rounded end">{{player1Stats?.averageRebounds}}</div>
-      <div class="col-3 center">Average Rebounds</div>
+      <div class="col-3 center">Rebounds</div>
       <div class="col stat-winner rounded start">{{player2Stats?.averageRebounds}}</div>
   </div>
-  <div class="row py-1 mx-lg-5">
+  <div class="row py-1 mx-lg-5 align-items-center">
       <div class="col stat-winner rounded end">{{player1Stats?.averageAssists}}</div>
-      <div class="col-3 center">Average Assists</div>
+      <div class="col-3 center">Assists</div>
       <div class="col stat-loser rounded start">{{player2Stats?.averageAssists}}</div>
   </div>
-  <div class="row py-1 mx-lg-5">
+  <div class="row py-1 mx-lg-5 align-items-center">
       <div class="col stat-loser rounded end">{{player1Stats?.averageBlocks}}</div>
-      <div class="col-3 center">Average Blocks</div>
+      <div class="col-3 center">Blocks</div>
       <div class="col stat-winner rounded start">{{player2Stats?.averageBlocks}}</div>
   </div>
-  <div class="row py-1 mx-lg-5">
+  <div class="row py-1 mx-lg-5 align-items-center">
       <div class="col stat-loser rounded end">{{player1Stats?.averageSteals}}</div>
-      <div class="col-3 center">Average Steals</div>
+      <div class="col-3 center">Steals</div>
       <div class="col stat-winner rounded start">{{player2Stats?.averageSteals}}</div>
   </div>
-  <div class="row py-1 mx-lg-5">
+  <div class="row py-1 mx-lg-5 align-items-center">
+    <div class="col stat-loser rounded end">{{player1Stats?.averageFieldGoalsMade}}</div>
+    <div class="col-3 center">Field Goals Made</div>
+    <div class="col stat-winner rounded start">{{player2Stats?.averageFieldGoalsMade}}</div>
+  </div>
+  <div class="row py-1 mx-lg-5 align-items-center">
+    <div class="col stat-winner  rounded end">{{player1Stats?.averageFieldGoalsAttempted}}</div>
+    <div class="col-3 center">Field Goals Attempted</div>
+    <div class="col stat-loser rounded start">{{player2Stats?.averageFieldGoalsAttempted}}</div>
+  </div>
+  <div class="row py-1 mx-lg-5 align-items-center">
+    <div class="col stat-loser rounded end">{{player1Stats?.averageFieldGoalPercentage}}%</div>
+    <div class="col-3 center">Field Goal Percentage</div>
+    <div class="col stat-winner rounded start">{{player2Stats?.averageFieldGoalPercentage}}%</div>
+  </div>
+  <div class="row py-1 mx-lg-5 align-items-center">
+    <div class="col stat-winner  rounded end">{{player1Stats?.average3PointersMade}}</div>
+    <div class="col-3 center">3 Pointers Made</div>
+    <div class="col stat-loser rounded start">{{player2Stats?.average3PointersMade}}</div>
+  </div>
+  <div class="row py-1 mx-lg-5 align-items-center">
+    <div class="col stat-winner rounded end">{{player1Stats?.average3PointersAttempted}}</div>
+    <div class="col-3 center">3 Pointers Attempted</div>
+    <div class="col stat-loser rounded start">{{player2Stats?.average3PointersAttempted}}</div>
+  </div>
+  <div class="row py-1 mx-lg-5 align-items-center">
+    <div class="col stat-winner rounded end">{{player1Stats?.average3PointPercentage}}%</div>
+    <div class="col-3 center">3 Point Percentage</div>
+    <div class="col stat-loser rounded start">{{player2Stats?.average3PointPercentage}}%</div>
+  </div>
+  <div class="row py-1 mx-lg-5 align-items-center">
+    <div class="col stat-loser rounded end">{{player1Stats?.averageFreeThrowsMade}}</div>
+    <div class="col-3 center">Free Throws Made</div>
+    <div class="col stat-winner rounded start">{{player2Stats?.averageFreeThrowsMade}}</div>
+  </div>
+  <div class="row py-1 mx-lg-5 align-items-center">
+    <div class="col stat-loser rounded end">{{player1Stats?.averageFreeThrowsAttempted}}</div>
+    <div class="col-3 center">Free Throws Attempted</div>
+    <div class="col stat-winner rounded start">{{player2Stats?.averageFreeThrowsAttempted}}</div>
+  </div>
+  <div class="row py-1 mx-lg-5 align-items-center">
+    <div class="col stat-winner rounded end">{{player1Stats?.averageFreeThrowPercentage}}%</div>
+    <div class="col-3 center">Free Throw Percentage</div>
+    <div class="col stat-loser rounded start">{{player2Stats?.averageFreeThrowPercentage}}%</div>
+  </div>
+  <div class="row py-1 mx-lg-5 align-items-center">
+    <div class="col stat-loser rounded end">{{player1Stats?.averageOffensiveRebounds}}</div>
+    <div class="col-3 center">Offensive Rebounds</div>
+    <div class="col stat-winner rounded start">{{player2Stats?.averageOffensiveRebounds}}</div>
+  </div>
+  <div class="row py-1 mx-lg-5 align-items-center">
+    <div class="col stat-loser rounded end">{{player1Stats?.averageDefensiveRebounds}}</div>
+    <div class="col-3 center">Defensive Rebounds</div>
+    <div class="col stat-winner rounded start">{{player2Stats?.averageDefensiveRebounds}}</div>
+  </div>
+  <div class="row py-1 mx-lg-5 align-items-center">
+    <div class="col stat-winner rounded end">{{player1Stats?.averageTurnovers}}</div>
+    <div class="col-3 center">Turnovers</div>
+    <div class="col stat-loser rounded start">{{player2Stats?.averageTurnovers}}</div>
+  </div>
+  <div class="row py-1 mx-lg-5 align-items-center">
+    <div class="col stat-loser rounded end">{{player1Stats?.averagePersonalFouls}}</div>
+    <div class="col-3 center">Personal Fouls</div>
+    <div class="col stat-winner rounded start">{{player2Stats?.averagePersonalFouls}}</div>
+  </div>
+  <div class="row py-1 mx-lg-5 align-items-center">
       <div class="col stat-loser rounded end">{{player1Stats?.plusMinus}}</div>
       <div class="col-3 center">Plus/Minus</div>
       <div class="col stat-winner rounded start">{{player2Stats?.plusMinus}}</div>
