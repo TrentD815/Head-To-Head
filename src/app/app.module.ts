@@ -7,7 +7,7 @@ import { PlayerProfileComponent } from './player-profile/player-profile.componen
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { PlayerStatsComponent } from './player-stats/player-stats.component';
 import { StatNameComponent } from './stat-name/stat-name.component';
-
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -21,6 +21,7 @@ import { StatNameComponent } from './stat-name/stat-name.component';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

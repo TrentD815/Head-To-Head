@@ -53,6 +53,7 @@ body {
 
 .card-header {
   text-align: center;
+  padding: .5em 0 0 0;
 }
 .raised {
   box-shadow: 0 1px 2px rgba(0,0,0,0.07),
@@ -78,16 +79,18 @@ body {
   border-radius: 2em !important;
 }
 .stats {
-  font-size: 1.2em;
+  font-size: 1em;
 }
 .stat-name {
   text-align: center;
 }
 .stats-left {
   text-align: left;
+
 }
 .stats-right {
   text-align: right;
+  padding-right: 15px;
 }
 .stat-loser {
   background-color: #f9c1b1;
@@ -101,10 +104,18 @@ body {
 }
 .end {
   text-align: end;
+  padding-right: 15px;
 }
 .start {
   text-align: start;
+  padding-left: 15px;
 }
 .center {
   text-align: center;
+}
+.row {
+  --bs-gutter-x: 0;
+}
+.list-group-item {
+  border: none;
 }

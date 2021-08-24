@@ -8,7 +8,8 @@ import { PlayerStats} from "../player-stats";
 })
 export class PlayerStatsComponent implements OnInit {
   @Input() playerIdentity ?: string;
-  playerStats ?: PlayerStats;
+  player1Stats ?: PlayerStats;
+  player2Stats ?: PlayerStats;
 
   // Compares players head to head stats for each stat to see whose was better
   async determineBetterStat(player1: PlayerStats, player2: PlayerStats){
@@ -21,8 +22,7 @@ export class PlayerStatsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if (this.playerIdentity === "1") {
-      this.playerStats = {
+      this.player1Stats = {
         averagePoints: 25.1,
         averageAssists: 7.8,
         averageRebounds: 7.7,
@@ -30,9 +30,7 @@ export class PlayerStatsComponent implements OnInit {
         averageSteals: 1.1,
         plusMinus: 6.4
       }
-    }
-    else {
-      this.playerStats = {
+      this.player2Stats = {
         averagePoints: 28.1,
         averageAssists: 5.9,
         averageRebounds: 11,
@@ -40,7 +38,5 @@ export class PlayerStatsComponent implements OnInit {
         averageSteals: 1.2,
         plusMinus: 6.7
       }
-    }
   }
-
 }
