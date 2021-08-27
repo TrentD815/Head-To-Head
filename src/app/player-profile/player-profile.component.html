@@ -1,5 +1,5 @@
-<div class="player mx-lg-5">
-  <div class="card-light raised">
+<div class="mx-lg-5">
+  <div [ngClass]="{'card-light': !this.isDarkTheme, 'card-dark': this.isDarkTheme}" class="card-light card raised">
     <div class="card-header">
       <h3>{{player?.name}}</h3>
       <img src="{{player?.profilePicSource}}">
@@ -17,6 +17,6 @@
     </div>
   </div>
   <form class="d-flex">
-    <input class="form-control my-3 raised card-light rounded" type="search" placeholder="Search player..." aria-label="Search">
+    <input [ngClass]="{'card-light': !this.isDarkTheme, 'card-dark': this.isDarkTheme}" class="form-control my-3 raised card-light rounded" type="search" placeholder="Search player..." aria-label="Search">
   </form>
 </div>

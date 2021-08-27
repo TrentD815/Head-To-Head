@@ -9,13 +9,14 @@ import { PlayerProfile } from '../player-profile';
 })
 export class PlayerProfileComponent implements OnInit {
   @Input() playerIdentity ?: string;
+  @Input() isDarkTheme ?: boolean;
   player ?: PlayerProfile;
 
   // Get the dominant color of the players team logo to be used later for changing the background color
   async getDominantColorPlayer(player:PlayerProfile) {
      if (player.teamLogoSource != null) {
        const dominantColorPlayer = await getColorFromURL(player.teamLogoSource, 1)
-       console.log("Player colors: ", dominantColorPlayer);
+       //console.log("Player colors: ", dominantColorPlayer);
        return dominantColorPlayer;
      }
      return null;

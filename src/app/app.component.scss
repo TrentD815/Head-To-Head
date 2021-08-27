@@ -1,16 +1,12 @@
 body {
   background-size: cover;
   font-family: "Roboto", sans-serif;
-  color: black;
+  color: #04060a;
 }
-.players{
+.players {
   display: flex;
   place-items: flex-start;
 }
-.player {
-
-}
-
 .bg-dark {
   background-color: #111927 !important;
   background-image:
@@ -70,10 +66,6 @@ body {
 .light-or-dark-mode-container {
   display: inline-flex;
 }
-.verticalLine {
-  border-left: thick solid #ff0000;
-  height:100%;
-}
 .rounded {
   border-radius: 2em !important;
 }
@@ -117,4 +109,9 @@ body {
 }
 .list-group-item {
   border: none;
+  color: inherit;
+}
+::placeholder {
+  color: inherit;
+  opacity: 1;
 }

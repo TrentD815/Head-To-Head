@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'nav-bar',
@@ -6,17 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-bar.component.scss','../app.component.scss']
 })
 export class NavBarComponent implements OnInit {
-  darkTheme: boolean | undefined;
-
+  @Output() themeSwitchEvent = new EventEmitter<boolean>();
   constructor() { }
 
   ngOnInit(): void {
-    this.darkTheme = false;
+
   }
 
-  switchTheme(value:boolean): void {
-    this.darkTheme = value;
-    console.log(this.darkTheme);
-
+  switchTheme(checked: any): void {
+      this.themeSwitchEvent.emit(checked);
   }
 }
