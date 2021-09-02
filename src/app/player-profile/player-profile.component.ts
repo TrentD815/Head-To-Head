@@ -31,7 +31,7 @@ export class PlayerProfileComponent implements OnInit {
         weight: 250,
         height: "6' 9",
         position: "Forward",
-        profilePicSource: "assets/LebronJames.png",
+        profilePicSource: "assets/Headshots/LebronJames.png",
         teamLogoSource: "/assets/Logos/LosAngelesLakers.svg",
         number: 6
       }
@@ -42,7 +42,7 @@ export class PlayerProfileComponent implements OnInit {
         weight: 242,
         height: "6' 11",
         position: "Forward",
-        profilePicSource: "assets/GiannisAntetokounmpo.png",
+        profilePicSource: "assets/Headshots/GiannisAntetokounmpo.png",
         teamLogoSource: "/assets/Logos/MilwaukeeBucks.svg",
         number: 34
       }
