@@ -9,6 +9,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { PlayerStatsComponent } from './player-stats/player-stats.component';
 import { StatNameComponent } from './stat-name/stat-name.component';
 import { CommonModule } from '@angular/common';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { CommonModule } from '@angular/common';
     NavBarComponent,
     PlayerStatsComponent,
     StatNameComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
