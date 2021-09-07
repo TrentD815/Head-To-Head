@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { getColorFromURL } from 'color-thief-node';
 import { PlayerProfile } from '../player-profile';
+const bent = require('bent')
+const axios = require('axios');
 
 @Component({
   selector: 'player-profile',
@@ -20,6 +22,73 @@ export class PlayerProfileComponent implements OnInit {
        return dominantColorPlayer;
      }
      return null;
+  }
+
+  // Get the players profile after the user searches for a player
+  async getPlayerProfile() {
+    console.log("getting player profile")
+    const config = {
+      method: 'get',
+      url: 'https://www.balldontlie.io/api/v1/players?search=Lebron%20James',
+      headers: {}
+    };
+    try {
+      let response = await axios(config);
+      response = response.data.data[0];
+      this.fillPlayerProfile(response);
+    }
+    catch (err) {
+      console.error(err)
+    }
+  }
+
+  // Take the returned player profile and autofill the data into their respective spots
+  fillPlayerProfile(player:any){
+    const teamLogoFullName = player.team.full_name;
+    const formattedTeamLogoSource = teamLogoFullName.split(" ").join("");
+    this.player = {
+      profilePicSource: `assets/Headshots/${player.first_name}${player.last_name}.png`,
+      teamLogoSource: `/assets/Logos/${formattedTeamLogoSource}.svg`,
+      name: player.first_name + " " + player.last_name,
+      team: player.team.full_name,
+      position: this.convertPositionToFullName(player.position),
+      height: player.height_feet + "' " + player.height_inches + '"',
+      weight: player.weight_pounds
+    }
+  }
+
+  convertPositionToFullName(positionShorthand: string) {
+    switch (positionShorthand) {
+      case 'F':
+        return 'Forward'
+        break;
+      case 'C':
+        return 'Center';
+        break;
+      default:
+        return positionShorthand
+        break;
+    }
+  }
+
+  // Get the players stats after the user searches for a player
+  async getStats() {
+    console.log("getting stats");
+
+    const config = {
+      method: 'get',
+      url: 'https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=237',
+      headers: {}
+    };
+
+    try {
+      let response = await axios(config);
+      response = JSON.stringify(response.data)
+      console.log(response)
+    }
+    catch (err) {
+      console.error(err)
+    }
   }
   constructor() {}
 
@@ -47,6 +116,6 @@ export class PlayerProfileComponent implements OnInit {
         number: 34
       }
     }
-    this.getDominantColorPlayer(this.player).then(r => console.log(r))
+    //this.getDominantColorPlayer(this.player).then(r => console.log(r))
   }
 }
