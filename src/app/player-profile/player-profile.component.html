@@ -7,19 +7,30 @@
     <div class="card-body">
       <ul class="list-group list-group-flush">
         <li class="list-group-item bg-transparent border-bottom px-0">
-          <span><img alt="Team logo for {{player?.team}}" height="32" width="32" src="{{player?.teamLogoSource}}"></span>
-          {{player?.team}}
+          <div class="row">
+            <div class="col">
+              {{player?.team}}
+              <img alt="Team logo for {{player?.team}}" height="28" width="28" src="{{player?.teamLogoSource}}">
+            </div>
+            <div class="col end">{{player?.position}}</div>
+          </div>
         </li>
-        <li class="list-group-item bg-transparent border-bottom px-0">{{player?.position}} (#{{player?.number}})</li>
-        <li class="list-group-item bg-transparent border-bottom px-0">Weight: {{player?.weight}} lbs</li>
-        <li class="list-group-item bg-transparent border-bottom px-0">Height: {{player?.height}}</li>
+        <li class="list-group-item bg-transparent border-bottom px-0">
+          <div class="row">
+            <div class="col">Weight: {{player?.weight}} lbs</div>
+            <div class="col end">Height: {{player?.height}}</div>
+          </div>
+        </li>
+<!--        <li class="list-group-item bg-transparent border-bottom px-0">{{player?.position}}</li>-->
+<!--        <li class="list-group-item bg-transparent border-bottom px-0">{{player?.position}} (#{{player?.number}})</li>-->
+<!--        <li class="list-group-item bg-transparent border-bottom px-0">Height: {{player?.height}}</li>-->
       </ul>
     </div>
   </div>
   <form class="d-flex">
-    <input [ngClass]="{'card-light': !this.isDarkTheme, 'card-dark': this.isDarkTheme}"
+    <input #search [ngClass]="{'card-light': !this.isDarkTheme, 'card-dark': this.isDarkTheme}"
            class="form-control my-3 raised card-light rounded" type="search"
-           placeholder="Search player..." aria-label="Search">
+           placeholder="Search player..." aria-label="Search"
+           (keydown.enter)="playerSearch(search.value)">
   </form>
-  <button disabled class="btn btn-dark" (click)="getPlayerProfile()">Get Player Profile</button>
 </div>

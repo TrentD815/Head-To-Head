@@ -13,7 +13,7 @@
       <div class="col-1"></div>
       <div [ngClass]="{'card-light': !this.isDarkTheme, 'card-dark': this.isDarkTheme}" class="card-light raised col">
           <div class="card-header mb-0"><h4>Advanced Head To Head Stats</h4></div>
-          <player-stats class="col"></player-stats>
+          <player-stats [retrievedPlayerStats]="this.retrievedPlayerStats" class="col"></player-stats>
       </div>
     </div>
   <hr/>

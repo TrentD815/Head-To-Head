@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
 import { NavBarComponent} from "./nav-bar/nav-bar.component";
 
 @Component({
@@ -9,6 +9,7 @@ import { NavBarComponent} from "./nav-bar/nav-bar.component";
 export class AppComponent {
   title = 'Head-To-Head';
   isDarkTheme: boolean | undefined;
+  @Input() retrievedPlayerStats ?: any;
 
   receiveTheme($event:any) {
     this.isDarkTheme = $event;

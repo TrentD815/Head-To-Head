@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { getColorFromURL } from 'color-thief-node';
 import { PlayerProfile } from '../player-profile';
 const bent = require('bent')
@@ -13,29 +13,27 @@ export class PlayerProfileComponent implements OnInit {
   @Input() playerIdentity ?: string;
   @Input() isDarkTheme ?: boolean;
   player ?: PlayerProfile;
+  searchedPlayer ?: string;
+  lastSearchedPlayer ?: string;
+  @Output() retrievedPlayerStats = new EventEmitter<any>();
 
-  // Get the dominant color of the players team logo to be used later for changing the background color
-  async getDominantColorPlayer(player:PlayerProfile) {
-     if (player.teamLogoSource != null) {
-       const dominantColorPlayer = await getColorFromURL(player.teamLogoSource, 1)
-       //console.log("Player colors: ", dominantColorPlayer);
-       return dominantColorPlayer;
-     }
-     return null;
+  async playerSearch(value:string) {
+    this.searchedPlayer = value;
+    await this.getPlayerProfile(this.searchedPlayer)
   }
 
   // Get the players profile after the user searches for a player
-  async getPlayerProfile() {
-    console.log("getting player profile")
+  async getPlayerProfile(searchedPlayer : string) {
     const config = {
       method: 'get',
-      url: 'https://www.balldontlie.io/api/v1/players?search=Lebron%20James',
+      url: `https://www.balldontlie.io/api/v1/players?search=${searchedPlayer}`,
       headers: {}
     };
     try {
-      let response = await axios(config);
-      response = response.data.data[0];
-      this.fillPlayerProfile(response);
+      let playerProfileResponse = await axios(config);
+      playerProfileResponse = playerProfileResponse.data.data[0];
+      await this.fillPlayerProfile(playerProfileResponse);
+      console.log(playerProfileResponse)
     }
     catch (err) {
       console.error(err)
@@ -43,7 +41,7 @@ export class PlayerProfileComponent implements OnInit {
   }
 
   // Take the returned player profile and autofill the data into their respective spots
-  fillPlayerProfile(player:any){
+  async fillPlayerProfile(player:any) {
     const teamLogoFullName = player.team.full_name;
     const formattedTeamLogoSource = teamLogoFullName.split(" ").join("");
     this.player = {
@@ -55,40 +53,57 @@ export class PlayerProfileComponent implements OnInit {
       height: player.height_feet + "' " + player.height_inches + '"',
       weight: player.weight_pounds
     }
+
+    const playerStatsResponse = await this.getPlayerStats(player);
+    this.retrievedPlayerStats.emit(playerStatsResponse)
   }
 
+  // Returned positions from API are single letter so convert them to full name for better user experience
   convertPositionToFullName(positionShorthand: string) {
-    switch (positionShorthand) {
-      case 'F':
-        return 'Forward'
-        break;
-      case 'C':
-        return 'Center';
-        break;
-      default:
-        return positionShorthand
-        break;
-    }
+      switch (positionShorthand) {
+        case 'F':
+          return 'Forward'
+        case 'C':
+          return 'Center';
+        case 'C-F':
+          return 'Forward-Center';
+        case 'G':
+          return 'Guard';
+        case 'F-G':
+          return 'Forward-Guard'
+        default:
+          return positionShorthand
+      }
   }
 
   // Get the players stats after the user searches for a player
-  async getStats() {
-    console.log("getting stats");
-
+  async getPlayerStats(player: any) {
     const config = {
       method: 'get',
-      url: 'https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=237',
+      url: `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${player.id}`,
       headers: {}
     };
 
     try {
-      let response = await axios(config);
-      response = JSON.stringify(response.data)
-      console.log(response)
+      let playerStatsResponse = await axios(config);
+      playerStatsResponse = JSON.stringify(playerStatsResponse.data)
+      console.log(playerStatsResponse)
+      return playerStatsResponse;
     }
     catch (err) {
       console.error(err)
     }
+  }
+
+
+  // Get the dominant color of the players team logo to be used later for changing the background color
+  async getDominantColorPlayer(player:PlayerProfile) {
+    if (player.teamLogoSource != null) {
+      const dominantColorPlayer = await getColorFromURL(player.teamLogoSource, 1)
+      //console.log("Player colors: ", dominantColorPlayer);
+      return dominantColorPlayer;
+    }
+    return null;
   }
   constructor() {}
 

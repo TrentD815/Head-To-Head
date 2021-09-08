@@ -9,9 +9,11 @@ import { PlayerStats} from "../player-stats";
 export class PlayerStatsComponent implements OnInit {
   @Input() playerIdentity ?: string;
   @Input() isDarkTheme ?: boolean;
+  @Input() retrievedPlayerStats ?: any;
   player1Stats ?: PlayerStats;
   player2Stats ?: PlayerStats;
   isHigherStat ?: boolean;
+
 
   // Compares players head to head stats for each stat to see whose was better
   async determineBetterStat(player1: PlayerStats, player2: PlayerStats){
