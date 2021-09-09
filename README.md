@@ -28,7 +28,7 @@ Then click the "View Deployment" button to open the project in a new tab. Occasi
 has been little traffic, first opening the project may take a bit (10-20 seconds) in order to 
 wake the server. After waking the server, the project should run as normal.
 
-##Disclaimers
+## Disclaimers
 - This project is strictly educational and not for commercial use
 - This content is not affiliated with, endorsed, sponsored, or specifically approved by the NBA and the 
   NBA is not responsible for it. For more information, visit the NBA's website [here](https://www.nba.com/termsofuse)

@@ -1,7 +1,14 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Observable, OperatorFunction} from 'rxjs';
+import {debounceTime, distinctUntilChanged, map, filter} from 'rxjs/operators';
 import { getColorFromURL } from 'color-thief-node';
 import { PlayerProfile } from '../player-profile';
+// @ts-ignore
+import { playerListImport } from 'src/app/player-profile/playerList.js';
 const axios = require('axios');
+
+type Player = string;
+const playerList: Player[] = playerListImport;
 
 @Component({
   selector: 'player-profile',
@@ -14,6 +21,7 @@ export class PlayerProfileComponent implements OnInit {
   player ?: PlayerProfile;
   searchedPlayer ?: string;
   @Output() retrievedPlayerProfileEvent = new EventEmitter<any>();
+
 
   async playerSearch(value:string) {
     this.searchedPlayer = value;
@@ -74,11 +82,18 @@ export class PlayerProfileComponent implements OnInit {
       }
   }
 
+  autoCompletePlayer: (text$: Observable<string>) => Observable<Player[]> = (text$: Observable<string>) => text$.pipe(
+    debounceTime(200),
+    distinctUntilChanged(),
+    filter(term => term.length >= 2),
+    map(term => playerList.filter(player => new RegExp(term, 'mi').test(player)).slice(0, 10))
+  )
+
   // Get the dominant color of the players team logo to be used later for changing the background color
   async getDominantColorPlayer(player:PlayerProfile) {
     if (player.teamLogoSource != null) {
       const dominantColorPlayer = await getColorFromURL(player.teamLogoSource, 1)
-      //console.log("Player colors: ", dominantColorPlayer);
+      console.log("Player colors: ", dominantColorPlayer);
       return dominantColorPlayer;
     }
     return null;

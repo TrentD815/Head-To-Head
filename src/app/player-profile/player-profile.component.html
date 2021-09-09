@@ -2,7 +2,7 @@
   <div [ngClass]="{'card-light': !this.isDarkTheme, 'card-dark': this.isDarkTheme}" class="card-light card raised">
     <div class="card-header">
       <h3>{{player?.name}}</h3>
-      <img src="{{player?.profilePicSource}}">
+      <img onerror="this.src='../assets/Headshots/NoPlayerDefault.png'" alt="Profile pic for {{player?.name}}" src="{{player?.profilePicSource}}">
     </div>
     <div class="card-body">
       <ul class="list-group list-group-flush">
@@ -21,9 +21,6 @@
             <div class="col end">Height: {{player?.height}}</div>
           </div>
         </li>
-<!--        <li class="list-group-item bg-transparent border-bottom px-0">{{player?.position}}</li>-->
-<!--        <li class="list-group-item bg-transparent border-bottom px-0">{{player?.position}} (#{{player?.number}})</li>-->
-<!--        <li class="list-group-item bg-transparent border-bottom px-0">Height: {{player?.height}}</li>-->
       </ul>
     </div>
   </div>
@@ -31,6 +28,8 @@
     <input #search [ngClass]="{'card-light': !this.isDarkTheme, 'card-dark': this.isDarkTheme}"
            class="form-control my-3 raised card-light rounded" type="search"
            placeholder="Search player..." aria-label="Search"
-           (keydown.enter)="playerSearch(search.value)">
+           (keydown.enter)="playerSearch(search.value)"
+           [editable]='false'
+           [ngbTypeahead]="autoCompletePlayer">
   </form>
 </div>

@@ -27,6 +27,7 @@
     "bent": "^7.3.12",
     "bootstrap": "^5.1.0",
     "color-thief-node": "^1.0.4",
+    "core-js": "^3.17.3",
     "express": "^4.17.1",
     "path": "^0.12.7",
     "rxjs": "~6.6.0",
