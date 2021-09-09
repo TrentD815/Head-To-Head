@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { getColorFromURL } from 'color-thief-node';
 import { PlayerProfile } from '../player-profile';
-const bent = require('bent')
 const axios = require('axios');
 
 @Component({
@@ -14,12 +13,12 @@ export class PlayerProfileComponent implements OnInit {
   @Input() isDarkTheme ?: boolean;
   player ?: PlayerProfile;
   searchedPlayer ?: string;
-  lastSearchedPlayer ?: string;
-  @Output() retrievedPlayerStats = new EventEmitter<any>();
+  @Output() retrievedPlayerProfileEvent = new EventEmitter<any>();
 
   async playerSearch(value:string) {
     this.searchedPlayer = value;
-    await this.getPlayerProfile(this.searchedPlayer)
+    const profile = await this.getPlayerProfile(this.searchedPlayer)
+    this.retrievedPlayerProfileEvent.emit(profile)
   }
 
   // Get the players profile after the user searches for a player
@@ -34,9 +33,11 @@ export class PlayerProfileComponent implements OnInit {
       playerProfileResponse = playerProfileResponse.data.data[0];
       await this.fillPlayerProfile(playerProfileResponse);
       console.log(playerProfileResponse)
+      return playerProfileResponse;
     }
     catch (err) {
       console.error(err)
+      return false;
     }
   }
 
@@ -53,9 +54,6 @@ export class PlayerProfileComponent implements OnInit {
       height: player.height_feet + "' " + player.height_inches + '"',
       weight: player.weight_pounds
     }
-
-    const playerStatsResponse = await this.getPlayerStats(player);
-    this.retrievedPlayerStats.emit(playerStatsResponse)
   }
 
   // Returned positions from API are single letter so convert them to full name for better user experience
@@ -65,7 +63,7 @@ export class PlayerProfileComponent implements OnInit {
           return 'Forward'
         case 'C':
           return 'Center';
-        case 'C-F':
+        case 'F-C':
           return 'Forward-Center';
         case 'G':
           return 'Guard';
@@ -75,26 +73,6 @@ export class PlayerProfileComponent implements OnInit {
           return positionShorthand
       }
   }
-
-  // Get the players stats after the user searches for a player
-  async getPlayerStats(player: any) {
-    const config = {
-      method: 'get',
-      url: `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${player.id}`,
-      headers: {}
-    };
-
-    try {
-      let playerStatsResponse = await axios(config);
-      playerStatsResponse = JSON.stringify(playerStatsResponse.data)
-      console.log(playerStatsResponse)
-      return playerStatsResponse;
-    }
-    catch (err) {
-      console.error(err)
-    }
-  }
-
 
   // Get the dominant color of the players team logo to be used later for changing the background color
   async getDominantColorPlayer(player:PlayerProfile) {

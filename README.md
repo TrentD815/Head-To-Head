@@ -1,27 +1,35 @@
-# HeadToHead
+# Head To Head
+## Overview
+  Head To Head is a simple interface where you can easily compare the stats of active NBA players. 
+  
+## Features
+  - Search stats for all active NBA players
+  - View side by side stat lines between 2 players 
+  - Lookahead player search when looking up players (upcoming)
+  - See how players stats are interconnected with other players on their team (upcoming)
+  - Light and dark themes
+  - Sleek design
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
+## Personal Goals For This Project
+  - Complete a project using Angular and Typescript as I feel exposure to these modern 
+    frameworks/languages are crucial to progressing my skill set as a developer
+  - Fulfill the vision that my friend and I desired to create a stat site where there are more 
+    interconnected stats between
+    NBA players that are not seen on other sites. This is done by not only utilizing the basic 
+    statlines but by analyzing play by play records
+  - Create a project that has a light/dark mode
+  - Create a project that uses the "frosted glass" effect on certain visual elements 
+    (commonly seen on iOS UI's)
 
-## Development server
+## Environment
+This project is actively available for viewing and interacting with via a Heroku server. Click 
+on the "head-to-head-stats" link under the "Environments" section on the right side of this repo. 
+Then click the "View Deployment" button to open the project in a new tab. Occasionally if there 
+has been little traffic, first opening the project may take a bit (10-20 seconds) in order to 
+wake the server. After waking the server, the project should run as normal.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+##Disclaimers
+- This project is strictly educational and not for commercial use
+- This content is not affiliated with, endorsed, sponsored, or specifically approved by the NBA and the 
+  NBA is not responsible for it. For more information, visit the NBA's website [here](https://www.nba.com/termsofuse)
+- This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { PlayerStats} from "../player-stats";
+const axios = require('axios');
 
 @Component({
   selector: 'player-stats',
@@ -9,21 +10,90 @@ import { PlayerStats} from "../player-stats";
 export class PlayerStatsComponent implements OnInit {
   @Input() playerIdentity ?: string;
   @Input() isDarkTheme ?: boolean;
-  @Input() retrievedPlayerStats ?: any;
+  @Input() playerProfile ?: any;
   player1Stats ?: PlayerStats;
   player2Stats ?: PlayerStats;
-  isHigherStat ?: boolean;
 
 
-  // Compares players head to head stats for each stat to see whose was better
-  async determineBetterStat(player1: PlayerStats, player2: PlayerStats){
-
+  async updatePlayerStats () {
+    console.log(`player profile is ${this.playerProfile}`);
+    if (this.playerProfile) {
+      const playerStatsResponse = await this.getPlayerStats(this.playerProfile);
+      await this.fillPlayerStats(playerStatsResponse);
+    }
   }
-  // Apply styling based on the winner of a stat to see visually who has a better stat a bit faster
-  async applyWinnerOrLoserStatColor(statBar:any) {
 
+  // Get the players stats after the user searches for a player
+  async getPlayerStats(player: any) {
+    const config = {
+      method: 'get',
+      url: `https://www.balldontlie.io/api/v1/season_averages?season=2020&player_ids[]=${player.id}`,
+      headers: {}
+    };
+
+    try {
+      let playerStatsResponse = await axios(config);
+      playerStatsResponse = playerStatsResponse.data.data[0]
+      console.log(playerStatsResponse)
+      return playerStatsResponse;
+    }
+    catch (err) {
+      console.error(err)
+    }
   }
+  async fillPlayerStats(stats: any) {
+    console.log(this.playerIdentity)
+      this.player1Stats = {
+        gamesPlayed: stats.games_played,
+        averageMinutesPlayed: stats.min,
+        averageFieldGoalsMade: stats.fgm,
+        averageFieldGoalsAttempted: stats.fga,
+        average3PointersMade: stats.fg3m,
+        average3PointersAttempted: stats.fg3a,
+        averageFreeThrowsMade: stats.ftm,
+        averageFreeThrowsAttempted: stats.fta,
+        averageOffensiveRebounds: stats.oreb,
+        averageDefensiveRebounds: stats.dreb,
+        averageRebounds: stats.reb,
+        averageAssists: stats.ast,
+        averageSteals: stats.stl,
+        averageBlocks: stats.blk,
+        averageTurnovers: stats.turnover,
+        averagePersonalFouls: stats.pf,
+        averagePoints: stats.pts,
+        averageFieldGoalPercentage: stats.fg_pct * 100,
+        average3PointPercentage: stats.fg3_pct * 100,
+        averageFreeThrowPercentage: stats.ft_pct * 100
+      }
+      this.player2Stats = {
+        gamesPlayed: stats.games_played,
+        averageMinutesPlayed: stats.min,
+        averageFieldGoalsMade: stats.fgm,
+        averageFieldGoalsAttempted: stats.fga,
+        average3PointersMade: stats.fg3m,
+        average3PointersAttempted: stats.fg3a,
+        averageFreeThrowsMade: stats.ftm,
+        averageFreeThrowsAttempted: stats.fta,
+        averageOffensiveRebounds: stats.oreb,
+        averageDefensiveRebounds: stats.dreb,
+        averageRebounds: stats.reb,
+        averageAssists: stats.ast,
+        averageSteals: stats.stl,
+        averageBlocks: stats.blk,
+        averageTurnovers: stats.turnover,
+        averagePersonalFouls: stats.pf,
+        averagePoints: stats.pts,
+        averageFieldGoalPercentage: stats.fg_pct * 100,
+        average3PointPercentage: stats.fg3_pct * 100,
+        averageFreeThrowPercentage: stats.ft_pct * 100,
+      }
+  }
+
   constructor() { }
+
+  ngOnChanges(): void {
+    this.updatePlayerStats()
+  }
 
   ngOnInit(): void {
       this.player1Stats = {

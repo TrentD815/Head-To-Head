@@ -8,11 +8,14 @@ import { NavBarComponent} from "./nav-bar/nav-bar.component";
 })
 export class AppComponent {
   title = 'Head-To-Head';
-  isDarkTheme: boolean | undefined;
-  @Input() retrievedPlayerStats ?: any;
+  isDarkTheme ?: boolean;
+  playerProfile ?: any;
+
+  receivePlayerProfileStatus($event: any) {
+    this.playerProfile = $event;
+  }
 
   receiveTheme($event:any) {
     this.isDarkTheme = $event;
-    console.log("Is dark theme", this.isDarkTheme)
   }
 }
