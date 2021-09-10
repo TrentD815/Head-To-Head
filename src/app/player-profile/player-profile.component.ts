@@ -25,6 +25,7 @@ export class PlayerProfileComponent implements OnInit {
 
   async playerSearch(value:string) {
     this.searchedPlayer = value;
+    console.log(value)
     const profile = await this.getPlayerProfile(this.searchedPlayer)
     this.retrievedPlayerProfileEvent.emit(profile)
   }
@@ -78,7 +79,7 @@ export class PlayerProfileComponent implements OnInit {
         case 'F-G':
           return 'Forward-Guard'
         default:
-          return positionShorthand
+          return positionShorthand ? positionShorthand : "Unknown"
       }
   }
 
@@ -108,7 +109,7 @@ export class PlayerProfileComponent implements OnInit {
         weight: 250,
         height: "6' 9",
         position: "Forward",
-        profilePicSource: "assets/Headshots/LebronJames.png",
+        profilePicSource: "assets/Headshots/LeBronJames.png",
         teamLogoSource: "/assets/Logos/LosAngelesLakers.svg",
         number: 6
       }

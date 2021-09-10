@@ -16,7 +16,6 @@ export class PlayerStatsComponent implements OnInit {
 
 
   async updatePlayerStats () {
-    console.log(`player profile is ${this.playerProfile}`);
     if (this.playerProfile) {
       const playerStatsResponse = await this.getPlayerStats(this.playerProfile);
       await this.fillPlayerStats(playerStatsResponse);
@@ -91,7 +90,7 @@ export class PlayerStatsComponent implements OnInit {
   constructor() { }
 
   ngOnChanges(): void {
-    this.updatePlayerStats()
+    this.updatePlayerStats().catch(err => {console.log(err)})
   }
 
   ngOnInit(): void {

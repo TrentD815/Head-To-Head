@@ -30,6 +30,7 @@
            placeholder="Search player..." aria-label="Search"
            (keydown.enter)="playerSearch(search.value)"
            [editable]='false'
-           [ngbTypeahead]="autoCompletePlayer">
+           [ngbTypeahead]="autoCompletePlayer"
+           (selectItem)="playerSearch($event.item)">
   </form>
 </div>
