@@ -42,7 +42,6 @@ export class PlayerStatsComponent implements OnInit {
     }
   }
   async fillPlayerStats(stats: any) {
-    console.log(this.playerIdentity)
       this.player1Stats = {
         gamesPlayed: stats.games_played,
         averageMinutesPlayed: stats.min,

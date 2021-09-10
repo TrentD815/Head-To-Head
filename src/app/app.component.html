@@ -2,7 +2,7 @@
   <nav-bar [ngClass]="{'navbar-light': !this.isDarkTheme, 'navbar-dark': this.isDarkTheme}" (themeSwitchEvent)="receiveTheme($event)"></nav-bar>
   <div class="players row">
       <player-profile (retrievedPlayerProfileEvent)="receivePlayerProfileStatus($event)" [isDarkTheme]="this.isDarkTheme" class="col" playerIdentity="1"></player-profile>
-      <player-profile [isDarkTheme]="this.isDarkTheme" class="col" playerIdentity="2"></player-profile>
+      <player-profile (retrievedPlayerProfileEvent)="receivePlayerProfileStatus($event)" [isDarkTheme]="this.isDarkTheme" class="col" playerIdentity="2"></player-profile>
   </div>
   <hr/>
   <div class="stats row my-2 mx-lg-5">

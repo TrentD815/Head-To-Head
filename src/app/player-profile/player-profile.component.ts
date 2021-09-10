@@ -59,8 +59,8 @@ export class PlayerProfileComponent implements OnInit {
       name: player.first_name + " " + player.last_name,
       team: player.team.full_name,
       position: this.convertPositionToFullName(player.position),
-      height: player.height_feet + "' " + player.height_inches + '"',
-      weight: player.weight_pounds
+      height: player.height_feet ? player.height_feet + "' " + player.height_inches + '"' : "Unknown",
+      weight: player.weight_pounds ? player.weight_pounds : "Unknown"
     }
   }
 
