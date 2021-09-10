@@ -2,3 +2,7 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+@font-face {
+  font-family: "SFMono";
+  src: local("SFMono"), url(assets/Fonts/SFMono/SFMonoRegular.otf) format("opentype");
+}
