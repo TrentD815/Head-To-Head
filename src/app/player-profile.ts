@@ -3,7 +3,7 @@ export interface PlayerProfile {
   name ?: string;
   team ?: string;
   teamLogoSource ?: string;
-  weight ?: number;
+  weight ?: number | string;
   height ?: string;
   position ?: string;
   number ?: number;

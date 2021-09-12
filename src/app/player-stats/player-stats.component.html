@@ -56,9 +56,11 @@
       </div>
       <div class="border-bottom mx-3"></div>
       <div class="row py-1 mx-lg-5 align-items-center">
-        <div class="col  rounded end">{{player1Stats?.averageFieldGoalPercentage | number : '1.2-2'}}</div>
+        <div class="col  rounded end" *ngIf="!isNumber(player1Stats?.averageFreeThrowPercentage)">{{player1Stats?.averageFieldGoalPercentage}}</div>
+        <div class="col  rounded end" *ngIf="isNumber(player1Stats?.averageFreeThrowPercentage)">{{player1Stats?.averageFieldGoalPercentage | number : '1.2-2'}}</div>
         <div class="col-3 center">FG%</div>
-        <div class="col  rounded start">{{player2Stats?.averageFieldGoalPercentage | number : '1.2-2'}}</div>
+        <div class="col  rounded start" *ngIf="!isNumber(player1Stats?.averageFreeThrowPercentage)">{{player2Stats?.averageFieldGoalPercentage}}</div>
+        <div class="col  rounded start" *ngIf="isNumber(player1Stats?.averageFreeThrowPercentage)">{{player2Stats?.averageFieldGoalPercentage | number : '1.2-2'}}</div>
       </div>
       <div class="border-bottom mx-3"></div>
       <div class="row py-1 mx-lg-5 align-items-center">
@@ -74,9 +76,11 @@
       </div>
       <div class="border-bottom mx-3"></div>
       <div class="row py-1 mx-lg-5 align-items-center">
-        <div class="col  rounded end">{{player1Stats?.average3PointPercentage | number : '1.2-2'}}</div>
+        <div class="col  rounded end" *ngIf="!isNumber(player1Stats?.averageFreeThrowPercentage)">{{player1Stats?.average3PointPercentage}}</div>
+        <div class="col  rounded end" *ngIf="isNumber(player1Stats?.averageFreeThrowPercentage)">{{player1Stats?.average3PointPercentage | number : '1.2-2'}}</div>
         <div class="col-3 center">3P%</div>
-        <div class="col  rounded start">{{player2Stats?.average3PointPercentage | number : '1.2-2'}}</div>
+        <div class="col  rounded start" *ngIf="!isNumber(player1Stats?.averageFreeThrowPercentage)">{{player2Stats?.average3PointPercentage}}</div>
+        <div class="col  rounded start" *ngIf="isNumber(player1Stats?.averageFreeThrowPercentage)">{{player2Stats?.average3PointPercentage | number : '1.2-2'}}</div>
       </div>
       <div class="border-bottom mx-3"></div>
       <div class="row py-1 mx-lg-5 align-items-center">
@@ -92,9 +96,11 @@
       </div>
       <div class="border-bottom mx-3"></div>
       <div class="row py-1 mx-lg-5 align-items-center">
-        <div class="col  rounded end">{{player1Stats?.averageFreeThrowPercentage | number : '1.2-2'}}</div>
+        <div class="col rounded end" *ngIf="!isNumber(player1Stats?.averageFreeThrowPercentage)">{{player1Stats?.averageFreeThrowPercentage}}</div>
+        <div class="col rounded end" *ngIf="isNumber(player1Stats?.averageFreeThrowPercentage)">{{player1Stats?.averageFreeThrowPercentage | number : '1.2-2'}}</div>
         <div class="col-3 center">FT%</div>
-        <div class="col  rounded start">{{player2Stats?.averageFreeThrowPercentage | number : '1.2-2'}}</div>
+        <div class="col  rounded start" *ngIf="!isNumber(player1Stats?.averageFreeThrowPercentage)">{{player2Stats?.averageFreeThrowPercentage}}</div>
+        <div class="col  rounded start" *ngIf="isNumber(player1Stats?.averageFreeThrowPercentage)">{{player2Stats?.averageFreeThrowPercentage | number : '1.2-2'}}</div>
       </div>
       <div class="border-bottom mx-3"></div>
       <div class="row py-1 mx-lg-5 align-items-center">

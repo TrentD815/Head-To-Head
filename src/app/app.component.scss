@@ -1,18 +1,22 @@
+// Initial font and text color
 body {
   background-size: cover;
   font-family: "SFMono", serif;
   color: #04060a;
 }
+// Player profile container
 .players {
   display: flex;
   place-items: flex-start;
 }
+// Dark theme background
 .bg-dark {
   background-color: #111927 !important;
   background-image:
     radial-gradient(at 47% 33%, hsl(162.00, 77%, 40%) 0, transparent 59%),
     radial-gradient(at 82% 65%, hsl(218.00, 39%, 11%) 0, transparent 55%);
 }
+// Light theme background
 .bg-light {
   background-color: #50E3C2 !important;
   background-image:
@@ -20,11 +24,12 @@ body {
     radial-gradient(at 82% 65%, hsl(198.00, 100%, 50%) 0, transparent 55%);
     //linear-gradient(0.25turn, yellow,mix(yellow,green), green);
 }
+// Alternate picture background
 .bg-rainbow {
   background: url("https://i.imgur.com/4MuY3MR.png") no-repeat fixed;
 }
 
-/* Glassmorphism card effect */
+// Frosted glass card look for dark theme
 .card-dark {
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -33,6 +38,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.125);
   color: #fff;
 }
+// Frosted glass card look for light theme
 .card-light {
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -44,10 +50,12 @@ body {
     alignment: center;
   }
 }
+
 .card-header {
   text-align: center;
   padding: .5em 0 0 0;
 }
+// Give the appearance that the element is raised off the screen through shadows
 .raised {
   box-shadow: 0 1px 2px rgba(0,0,0,0.07),
   0 2px 4px rgba(0,0,0,0.07),
@@ -63,9 +71,11 @@ body {
 .light-or-dark-mode-container {
   display: inline-flex;
 }
+// Give a more rounded effect to any element
 .rounded {
   border-radius: 2em !important;
 }
+// Various stat specific styles
 .stats {
   font-size: 1em;
 }
@@ -100,6 +110,7 @@ body {
 .center {
   text-align: center;
 }
+// Fix some various styles
 .row {
   --bs-gutter-x: 0;
 }
@@ -111,11 +122,17 @@ body {
   color: inherit;
   opacity: 1;
 }
+// Looks better than default link
 a:link {
   text-decoration: none;
 }
+// Make dark mode toggle appear clickable
 .form-check-input:hover {
   cursor: pointer;
+}
+//Hide hamburger even on small screens as it's not utilized
+.navbar-toggler {
+  display: none;
 }
 // Dark mode for player search lookahead
 //::ng-deep .dropdown-menu {
@@ -126,3 +143,11 @@ a:link {
 //  background-color: #04060a;
 //  color: white;
 //}
+
+// Light and Dark themes for horizontal divider line
+.breakline-light {
+  color: #04060a;
+}
+.breakline-dark {
+  color: white;
+}

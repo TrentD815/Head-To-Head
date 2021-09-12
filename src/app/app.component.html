@@ -4,7 +4,7 @@
       <player-profile (retrievedPlayerProfileEvent)="receivePlayerProfileStatus($event)" [isDarkTheme]="this.isDarkTheme" class="col" playerIdentity="1"></player-profile>
       <player-profile (retrievedPlayerProfileEvent)="receivePlayerProfileStatus($event)" [isDarkTheme]="this.isDarkTheme" class="col" playerIdentity="2"></player-profile>
   </div>
-  <hr/>
+  <hr [ngClass]="{'breakline-light': !this.isDarkTheme, 'breakline-dark': this.isDarkTheme}"/>
   <div class="stats row my-2 mx-lg-5">
       <div [ngClass]="{'card-light': !this.isDarkTheme, 'card-dark': this.isDarkTheme}" class="card-light raised col">
           <div class="card-header mb-0"><h4>Basic Head To Head Stats</h4></div>
@@ -16,6 +16,6 @@
           <player-stats [playerProfile]="playerProfile" class="col"></player-stats>
       </div>
     </div>
-  <hr/>
+  <hr [ngClass]="{'breakline-light': !this.isDarkTheme, 'breakline-dark': this.isDarkTheme}"/>
   <footer></footer>
 </body>

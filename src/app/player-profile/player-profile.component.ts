@@ -25,7 +25,6 @@ export class PlayerProfileComponent implements OnInit {
 
   async playerSearch(value:string) {
     this.searchedPlayer = value;
-    console.log(value)
     const profile = await this.getPlayerProfile(this.searchedPlayer)
     this.retrievedPlayerProfileEvent.emit(profile)
   }
@@ -61,7 +60,7 @@ export class PlayerProfileComponent implements OnInit {
       team: player.team.full_name,
       position: this.convertPositionToFullName(player.position),
       height: player.height_feet ? player.height_feet + "' " + player.height_inches + '"' : "Unknown",
-      weight: player.weight_pounds ? player.weight_pounds : "Unknown"
+      weight: player.weight_pounds ? player.weight_pounds + " lbs" : "Unknown"
     }
   }
 
@@ -83,6 +82,7 @@ export class PlayerProfileComponent implements OnInit {
       }
   }
 
+  //
   autoCompletePlayer: (text$: Observable<string>) => Observable<Player[]> = (text$: Observable<string>) => text$.pipe(
     debounceTime(200),
     distinctUntilChanged(),
@@ -104,25 +104,25 @@ export class PlayerProfileComponent implements OnInit {
   ngOnInit(): void {
     if (this.playerIdentity === "1") {
       this.player = {
-        name: "Lebron James",
-        team: "Los Angeles Lakers",
-        weight: 250,
-        height: "6' 9",
-        position: "Forward",
-        profilePicSource: "assets/Headshots/LeBronJames.png",
-        teamLogoSource: "/assets/Logos/LosAngelesLakers.svg",
-        number: 6
+        name: "Player 1",
+        team: "Team",
+        weight: "-",
+        height: `-`,
+        position: "Position",
+        profilePicSource: "/assets/Headshots/NoPlayerDefault.png",
+        teamLogoSource: "/assets/Logos/BasketballDefault.png",
+        number: 0
       }
     } else {
       this.player = {
-        name: "Giannis Antetokounmpo",
-        team: "Milwaukee Bucks",
-        weight: 242,
-        height: "6' 11",
-        position: "Forward",
-        profilePicSource: "assets/Headshots/GiannisAntetokounmpo.png",
-        teamLogoSource: "/assets/Logos/MilwaukeeBucks.svg",
-        number: 34
+        name: "Player 2",
+        team: "Team",
+        weight: "-",
+        height: `-`,
+        position: "Position",
+        profilePicSource: "assets/Headshots/NoPlayerDefault.png",
+        teamLogoSource: "/assets/Logos/BasketballDefault.png",
+        number: 0
       }
     }
     //this.getDominantColorPlayer(this.player).then(r => console.log(r))
