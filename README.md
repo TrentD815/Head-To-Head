@@ -5,7 +5,7 @@
 ## Features
   - Search stats for all active NBA players
   - View side by side stat lines between 2 players 
-  - Lookahead player search when looking up players (upcoming)
+  - Lookahead player search when looking up players
   - See how players stats are interconnected with other players on their team (upcoming)
   - Light and dark themes
   - Sleek design
@@ -22,11 +22,10 @@
     (commonly seen on iOS UI's)
 
 ## Environment
-This project is actively available for viewing and interacting with via a Heroku server. Click 
-on the "head-to-head-stats" link under the "Environments" section on the right side of this repo. 
-Then click the "View Deployment" button to open the project in a new tab. Occasionally if there 
-has been little traffic, first opening the project may take a bit (10-20 seconds) in order to 
-wake the server. After waking the server, the project should run as normal.
+View and play around with Head To Head [here](head-to-head-stats.herokuapp.com). Alternatively,
+click on the "Environments" section on the right side of this repo. Then click "View Deployment" to 
+open the project in a new tab. Occasionally if there has been little traffic, first opening the project 
+may take a bit (10-20 seconds) in order to wake the server. After waking the server, the project should run as normal.
 
 ## Disclaimers
 - This project is strictly educational and not for commercial use

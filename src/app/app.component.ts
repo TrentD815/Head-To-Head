@@ -1,5 +1,4 @@
-import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
-import { NavBarComponent} from "./nav-bar/nav-bar.component";
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +13,7 @@ export class AppComponent {
   receivePlayerProfileStatus($event: any) {
     this.playerProfile = $event;
   }
-
-  receiveTheme($event:any) {
+  receiveTheme($event: any) {
     this.isDarkTheme = $event;
   }
 }

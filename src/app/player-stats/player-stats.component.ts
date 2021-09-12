@@ -8,7 +8,6 @@ const axios = require('axios');
   styleUrls: ['./player-stats.component.scss', '../app.component.scss']
 })
 export class PlayerStatsComponent implements OnInit {
-  @Input() playerIdentity ?: string;
   @Input() isDarkTheme ?: boolean;
   @Input() playerProfile ?: any;
   player1Stats ?: PlayerStats;
@@ -33,7 +32,7 @@ export class PlayerStatsComponent implements OnInit {
     try {
       let playerStatsResponse = await axios(config);
       playerStatsResponse = playerStatsResponse.data.data[0]
-      console.log(playerStatsResponse)
+      //console.log(playerStatsResponse)
       return playerStatsResponse;
     }
     catch (err) {
@@ -44,6 +43,7 @@ export class PlayerStatsComponent implements OnInit {
   // Take returned stat response and update the UI with the corresponding fields
   async fillPlayerStats(stats: any, player: any) {
     //TODO: List what season the stats are for somewhere
+    if (player.identity === "1") {
       this.player1Stats = {
         gamesPlayed: stats.games_played,
         averageMinutesPlayed: stats.min,
@@ -66,6 +66,8 @@ export class PlayerStatsComponent implements OnInit {
         average3PointPercentage: stats.fg3_pct * 100,
         averageFreeThrowPercentage: stats.ft_pct * 100
       }
+    }
+    else {
       this.player2Stats = {
         gamesPlayed: stats.games_played,
         averageMinutesPlayed: stats.min,
@@ -88,6 +90,7 @@ export class PlayerStatsComponent implements OnInit {
         average3PointPercentage: stats.fg3_pct * 100,
         averageFreeThrowPercentage: stats.ft_pct * 100,
       }
+    }
   }
 
   // Check to allow some html elements to be piped without error

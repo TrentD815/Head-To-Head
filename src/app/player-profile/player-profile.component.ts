@@ -22,11 +22,11 @@ export class PlayerProfileComponent implements OnInit {
   searchedPlayer ?: string;
   @Output() retrievedPlayerProfileEvent = new EventEmitter<any>();
 
-
   async playerSearch(value:string) {
     this.searchedPlayer = value;
-    const profile = await this.getPlayerProfile(this.searchedPlayer)
-    this.retrievedPlayerProfileEvent.emit(profile)
+    const profile = await this.getPlayerProfile(this.searchedPlayer);
+    profile.identity = this.playerIdentity
+    this.retrievedPlayerProfileEvent.emit(profile);
   }
 
   // Get the players profile after the user searches for a player
@@ -40,7 +40,7 @@ export class PlayerProfileComponent implements OnInit {
       let playerProfileResponse = await axios(config);
       playerProfileResponse = playerProfileResponse.data.data[0];
       await this.fillPlayerProfile(playerProfileResponse);
-      console.log(playerProfileResponse)
+      //console.log(playerProfileResponse)
       return playerProfileResponse;
     }
     catch (err) {
@@ -82,7 +82,7 @@ export class PlayerProfileComponent implements OnInit {
       }
   }
 
-  //
+  // Sort through player list based on inputted value and return a list of results
   autoCompletePlayer: (text$: Observable<string>) => Observable<Player[]> = (text$: Observable<string>) => text$.pipe(
     debounceTime(200),
     distinctUntilChanged(),
@@ -94,13 +94,14 @@ export class PlayerProfileComponent implements OnInit {
   async getDominantColorPlayer(player:PlayerProfile) {
     if (player.teamLogoSource != null) {
       const dominantColorPlayer = await getColorFromURL(player.teamLogoSource, 1)
-      console.log("Player colors: ", dominantColorPlayer);
+      //console.log("Player colors: ", dominantColorPlayer);
       return dominantColorPlayer;
     }
     return null;
   }
   constructor() {}
 
+  //Initialize the default players
   ngOnInit(): void {
     if (this.playerIdentity === "1") {
       this.player = {
@@ -111,7 +112,6 @@ export class PlayerProfileComponent implements OnInit {
         position: "Position",
         profilePicSource: "/assets/Headshots/NoPlayerDefault.png",
         teamLogoSource: "/assets/Logos/BasketballDefault.png",
-        number: 0
       }
     } else {
       this.player = {
@@ -122,9 +122,7 @@ export class PlayerProfileComponent implements OnInit {
         position: "Position",
         profilePicSource: "assets/Headshots/NoPlayerDefault.png",
         teamLogoSource: "/assets/Logos/BasketballDefault.png",
-        number: 0
       }
     }
-    //this.getDominantColorPlayer(this.player).then(r => console.log(r))
   }
 }
