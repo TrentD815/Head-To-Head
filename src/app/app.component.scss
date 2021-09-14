@@ -154,6 +154,8 @@ a:link {
   display: none;
 }
 
+// TODO: Somehow use these overridden pseudo class
+//  conditionally when the theme is changed
 // Dark mode for dropdown elements
 //::ng-deep .dropdown-menu {
 //  background-color: #04060a;
@@ -163,6 +165,10 @@ a:link {
 //  background-color: #04060a;
 //  color: white;
 //}
+.dropdown-menu-dark {
+    background-color: #04060a;
+    color: white;
+}
 
 // Light and Dark themes for horizontal divider line
 .breakline-light {

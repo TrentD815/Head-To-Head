@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Observable, OperatorFunction} from 'rxjs';
-import {debounceTime, distinctUntilChanged, map, filter} from 'rxjs/operators';
-import { getColorFromURL } from 'color-thief-node';
-import { PlayerProfile } from '../player-profile';
+import {Observable} from 'rxjs';
+import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
+import {getColorFromURL} from 'color-thief-node';
+import {PlayerProfile} from '../player-profile';
 // @ts-ignore
-import { playerListImport } from 'src/app/player-profile/playerList.js';
+import {playerListImport} from 'src/app/player-profile/playerList.js';
 const axios = require('axios');
 
 type Player = string;
@@ -18,14 +18,20 @@ const playerList: Player[] = playerListImport;
 export class PlayerProfileComponent implements OnInit {
   @Input() playerIdentity ?: string;
   @Input() isDarkTheme ?: boolean;
+  @Output() retrievedPlayerProfileEvent = new EventEmitter<any>();
   player ?: PlayerProfile;
   searchedPlayer ?: string;
-  @Output() retrievedPlayerProfileEvent = new EventEmitter<any>();
+  seasonTypes ?: string[];
+  seasonType ?: string;
+  years ?: string[];
+  year ?: string;
 
   async playerSearch(value:string) {
     this.searchedPlayer = value;
     const profile = await this.getPlayerProfile(this.searchedPlayer);
-    profile.identity = this.playerIdentity
+    profile.identity = this.playerIdentity;
+    profile.year = this.year;
+    profile.seasonType = this.seasonType;
     this.retrievedPlayerProfileEvent.emit(profile);
   }
 
@@ -90,6 +96,17 @@ export class PlayerProfileComponent implements OnInit {
     map(term => playerList.filter(player => new RegExp(term, 'mi').test(player)).slice(0, 10))
   )
 
+  typeSelection(typeSelected: string) {
+    this.seasonType = typeSelected;
+    this.year = this.isCareerChosen()  ? "N/A" : "Year";
+  }
+  yearSelection(yearSelected: string) {
+      this.year = `20${yearSelected.substr(0, 2)}`;
+  }
+  isCareerChosen() {
+    return this.seasonType?.includes("Career");
+  }
+
   // Get the dominant color of the players team logo to be used later for changing the background color
   async getDominantColorPlayer(player:PlayerProfile) {
     if (player.teamLogoSource != null) {
@@ -124,5 +141,10 @@ export class PlayerProfileComponent implements OnInit {
         teamLogoSource: "/assets/Logos/BasketballDefault.png",
       }
     }
+    this.seasonTypes = ["Regular", "Playoffs", "Career", "Career Regular", "Career Playoffs"]
+    this.seasonType = "Type";
+    this.years = ["21-22","20-21","19-20","18-19","17-18","16-17","15-16","14-15","13-14",
+      "12-13","11-12","10-11", "09-10","08-09","07-08","06-07","05-06","04-05","03-04","02-03"]
+    this.year = "Year"
   }
 }
