@@ -25,12 +25,32 @@
     </div>
   </div>
   <form class="d-flex">
-    <input #search [ngClass]="{'card-light': !this.isDarkTheme, 'card-dark': this.isDarkTheme}"
-           class="form-control my-3 raised card-light rounded" type="search"
-           placeholder="Search player..." aria-label="Search"
-           (keydown.enter)="playerSearch(search.value)"
-           [editable]='false'
-           [ngbTypeahead]="autoCompletePlayer"
-           (selectItem)="playerSearch($event.item)">
+    <div class="input-group my-3">
+      <input #search [ngClass]="{'card-light': !this.isDarkTheme, 'card-dark': this.isDarkTheme}"
+             class="form-control raised card-light rounded" type="search"
+             placeholder="Search player..." aria-label="Search"
+             (keydown.enter)="playerSearch(search.value)"
+             [editable]='false'
+             [ngbTypeahead]="autoCompletePlayer"
+             (selectItem)="playerSearch($event.item)">
+      <div ngbDropdown class="d-inline-block">
+        <button [ngClass]="{'btn-outline-secondary': !this.isDarkTheme, 'btn-outline-secondary-dark': this.isDarkTheme}"
+                class="btn raised middle-dropdown" id="yearDropdown" ngbDropdownToggle>Year</button>
+        <div ngbDropdownMenu aria-labelledby="yearDropdown">
+          <button ngbDropdownItem>2020</button>
+          <button ngbDropdownItem>2019</button>
+          <button ngbDropdownItem>2018</button>
+        </div>
+      </div>
+      <div ngbDropdown class="d-inline-block">
+        <button [ngClass]="{'btn-outline-secondary': !this.isDarkTheme, 'btn-outline-secondary-dark': this.isDarkTheme}"
+                class="btn raised end-dropdown" id="typeDropdown" ngbDropdownToggle>Type</button>
+        <div ngbDropdownMenu aria-labelledby="typeDropdown">
+          <button ngbDropdownItem>Regular</button>
+          <button ngbDropdownItem>Playoffs</button>
+          <button ngbDropdownItem>Career</button>
+        </div>
+      </div>
+    </div>
   </form>
 </div>

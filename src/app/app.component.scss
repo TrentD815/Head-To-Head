@@ -1,14 +1,20 @@
+// Variables
+$glass-white: rgba(255, 255, 255, 0.75);
+$glass-dark: rgba(17, 25, 40, 0.7);
+
 // Initial font and text color
 body {
   background-size: cover;
   font-family: "SFMono", serif;
   color: #04060a;
 }
+
 // Player profile container
 .players {
   display: flex;
   place-items: flex-start;
 }
+
 // Dark theme background
 .bg-dark {
   background-color: #111927 !important;
@@ -16,6 +22,7 @@ body {
     radial-gradient(at 47% 33%, hsl(162.00, 77%, 40%) 0, transparent 59%),
     radial-gradient(at 82% 65%, hsl(218.00, 39%, 11%) 0, transparent 55%);
 }
+
 // Light theme background
 .bg-light {
   background-color: #50E3C2 !important;
@@ -24,6 +31,7 @@ body {
     radial-gradient(at 82% 65%, hsl(198.00, 100%, 50%) 0, transparent 55%);
     //linear-gradient(0.25turn, yellow,mix(yellow,green), green);
 }
+
 // Alternate picture background
 .bg-rainbow {
   background: url("https://i.imgur.com/4MuY3MR.png") no-repeat fixed;
@@ -33,16 +41,20 @@ body {
 .card-dark {
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(17, 25, 40, 0.7);
-  border-radius: 12px;
+  background-color: $glass-dark;
+  border-radius: 2em;
   border: 1px solid rgba(255, 255, 255, 0.125);
   color: #fff;
+  .img {
+    alignment: center;
+  }
 }
+
 // Frosted glass card look for light theme
 .card-light {
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(255, 255, 255, 0.75);
+  background-color: $glass-white;
   border-radius: 12px;
   border: 1px solid rgba(209, 213, 219, 0.3);
   color: #04060a;
@@ -55,6 +67,7 @@ body {
   text-align: center;
   padding: .5em 0 0 0;
 }
+
 // Give the appearance that the element is raised off the screen through shadows
 .raised {
   box-shadow: 0 1px 2px rgba(0,0,0,0.07),
@@ -64,17 +77,19 @@ body {
   0 16px 32px rgba(0,0,0,0.07),
   0 32px 64px rgba(0,0,0,0.07);
 }
-.form-check-input{
+.form-check-input {
   width: 3em;
   height: 1.5em;
 }
 .light-or-dark-mode-container {
   display: inline-flex;
 }
-// Give a more rounded effect to any element
+
+// Give a more rounded to the search bars
 .rounded {
-  border-radius: 2em !important;
+  border-radius: 2em 0 0 2em !important;
 }
+
 // Various stat specific styles
 .stats {
   font-size: 1em;
@@ -110,6 +125,7 @@ body {
 .center {
   text-align: center;
 }
+
 // Fix some various styles
 .row {
   --bs-gutter-x: 0;
@@ -122,19 +138,23 @@ body {
   color: inherit;
   opacity: 1;
 }
+
 // Looks better than default link
 a:link {
   text-decoration: none;
 }
+
 // Make dark mode toggle appear clickable
 .form-check-input:hover {
   cursor: pointer;
 }
-//Hide hamburger even on small screens as it's not utilized
+
+// Hide hamburger even on small screens as it's not utilized
 .navbar-toggler {
   display: none;
 }
-// Dark mode for player search lookahead
+
+// Dark mode for dropdown elements
 //::ng-deep .dropdown-menu {
 //  background-color: #04060a;
 //  color: white;
@@ -150,4 +170,22 @@ a:link {
 }
 .breakline-dark {
   color: white;
+}
+
+// Light and dark themes for dropdowns
+.btn-outline-secondary {
+  background-color: $glass-white !important;
+  border-color: #50E3C2;
+  color: #04060a;
+}
+.btn-outline-secondary-dark {
+  background-color: $glass-dark !important;
+  border: 1px solid #26916D;
+  color: white;
+}
+.end-dropdown {
+  border-radius: 0 2em 2em 0;
+}
+.middle-dropdown {
+  border-radius: 0;
 }
