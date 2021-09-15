@@ -20,4 +20,5 @@ export interface PlayerStats {
   averageBlocks ?: number | string;
   plusMinus ?: number | string;
   averagePersonalFouls ?: number | string;
+  name ?: string;
 }

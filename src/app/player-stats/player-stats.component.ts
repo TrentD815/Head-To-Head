@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { PlayerStats} from "../player-stats";
+import {PlayerStats} from "../player-stats";
 const axios = require('axios');
 
 @Component({
@@ -23,9 +23,10 @@ export class PlayerStatsComponent implements OnInit {
 
   // Get the players stats after the user searches for a player
   async getPlayerStats(player: any) {
+    //let endpoint = `https://www.balldontlie.io/api/v1/season_averages?season=${player.year}&player_ids[]=${player.id}`
     const config = {
       method: 'get',
-      url: `https://www.balldontlie.io/api/v1/season_averages?season=2020&player_ids[]=${player.id}`,
+      url: `https://www.balldontlie.io/api/v1/season_averages?season=${player.year}&player_ids[]=${player.id}`,
       headers: {}
     };
 
@@ -42,7 +43,6 @@ export class PlayerStatsComponent implements OnInit {
 
   // Take returned stat response and update the UI with the corresponding fields
   async fillPlayerStats(stats: any, player: any) {
-    //TODO: List what season the stats are for somewhere
     if (player.identity === "1") {
       this.player1Stats = {
         gamesPlayed: stats.games_played,
@@ -64,7 +64,8 @@ export class PlayerStatsComponent implements OnInit {
         averagePoints: stats.pts,
         averageFieldGoalPercentage: stats.fg_pct * 100,
         average3PointPercentage: stats.fg3_pct * 100,
-        averageFreeThrowPercentage: stats.ft_pct * 100
+        averageFreeThrowPercentage: stats.ft_pct * 100,
+        name: `${player.first_name} ${player.last_name}`
       }
     }
     else {
@@ -89,6 +90,7 @@ export class PlayerStatsComponent implements OnInit {
         averageFieldGoalPercentage: stats.fg_pct * 100,
         average3PointPercentage: stats.fg3_pct * 100,
         averageFreeThrowPercentage: stats.ft_pct * 100,
+        name: `${player.first_name} ${player.last_name}`
       }
     }
   }
@@ -126,7 +128,8 @@ export class PlayerStatsComponent implements OnInit {
         averageDefensiveRebounds: "-",
         averageTurnovers: "-",
         averagePersonalFouls: "-",
-        plusMinus: "-"
+        plusMinus: "-",
+        name: "-"
       }
       this.player2Stats = {
         gamesPlayed: "-",
@@ -149,7 +152,8 @@ export class PlayerStatsComponent implements OnInit {
         averageDefensiveRebounds: "-",
         averageTurnovers: "-",
         averagePersonalFouls: "-",
-        plusMinus: "-"
+        plusMinus: "-",
+        name: "-"
       }
   }
 }

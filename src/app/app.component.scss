@@ -1,5 +1,5 @@
 // Variables
-$glass-white: rgba(255, 255, 255, 0.75);
+$glass-light: rgba(255, 255, 255, 0.75);
 $glass-dark: rgba(17, 25, 40, 0.7);
 
 // Initial font and text color
@@ -54,7 +54,7 @@ body {
 .card-light {
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: $glass-white;
+  background-color: $glass-light;
   border-radius: 12px;
   border: 1px solid rgba(209, 213, 219, 0.3);
   color: #04060a;
@@ -85,7 +85,7 @@ body {
   display: inline-flex;
 }
 
-// Give a more rounded to the search bars
+// Give a more rounded appearance to the search bars
 .rounded {
   border-radius: 2em 0 0 2em !important;
 }
@@ -180,7 +180,7 @@ a:link {
 
 // Light and dark themes for dropdowns
 .btn-outline-secondary {
-  background-color: $glass-white !important;
+  background-color: $glass-light !important;
   border-color: #50E3C2;
   color: #04060a;
 }

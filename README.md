@@ -4,8 +4,9 @@
   
 ## Features
   - Search stats for all active NBA players
-  - View side by side stat lines between 2 players 
-  - Lookahead player search when looking up players
+  - View side by side stat lines between 2 players
+  - View stats based on season type (Regular/Playoffs) and by year (Specific/Career)
+  - Lookahead player search when finding players
   - See how players stats are interconnected with other players on their team (upcoming)
   - Light and dark themes
   - Sleek design
@@ -16,13 +17,13 @@
   - Fulfill the vision that my friend and I desired to create a stat site where there are more 
     interconnected stats between
     NBA players that are not seen on other sites. This is done by not only utilizing the basic 
-    statlines but by analyzing play by play records
+    stat lines but by analyzing play by play records
   - Create a project that has a light/dark mode
   - Create a project that uses the "frosted glass" effect on certain visual elements 
     (commonly seen on iOS UI's)
 
 ## Environment
-View and play around with Head To Head [here](head-to-head-stats.herokuapp.com). Alternatively,
+View and play around with Head To Head [here](https://head-to-head-stats.herokuapp.com). Alternatively,
 click on the "Environments" section on the right side of this repo. Then click "View Deployment" to 
 open the project in a new tab. Occasionally if there has been little traffic, first opening the project 
 may take a bit (10-20 seconds) in order to wake the server. After waking the server, the project should run as normal.
