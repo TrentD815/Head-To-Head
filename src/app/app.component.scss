@@ -94,6 +94,14 @@ body {
 .stats {
   font-size: 1em;
 }
+@media (max-width:450px) {
+  .stats {
+    flex-direction: column;
+  }
+  .stats > * {
+    margin-bottom: .5em;
+  }
+}
 .stat-name {
   text-align: center;
 }

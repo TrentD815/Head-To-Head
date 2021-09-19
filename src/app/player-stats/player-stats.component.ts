@@ -23,16 +23,17 @@ export class PlayerStatsComponent implements OnInit {
 
   // Get the players stats after the user searches for a player
   async getPlayerStats(player: any) {
-    //let endpoint = `https://www.balldontlie.io/api/v1/season_averages?season=${player.year}&player_ids[]=${player.id}`
+    let regular = `https://www.balldontlie.io/api/v1/season_averages?season=${player.year}&player_ids[]=${player.id}`;
+    let playoffs = `https://www.balldontlie.io/api/v1/stats?seasons[]=${player.year}&player_ids[]=${player.id}&postseason=true`;
     const config = {
       method: 'get',
-      url: `https://www.balldontlie.io/api/v1/season_averages?season=${player.year}&player_ids[]=${player.id}`,
+      url: player.seasonType === "Regular" ? regular : playoffs,
       headers: {}
     };
 
     try {
       let playerStatsResponse = await axios(config);
-      playerStatsResponse = playerStatsResponse.data.data[0]
+      playerStatsResponse = player.seasonType === "Regular" ? playerStatsResponse.data.data[0] : playerStatsResponse.data.data
       //console.log(playerStatsResponse)
       return playerStatsResponse;
     }
@@ -43,6 +44,11 @@ export class PlayerStatsComponent implements OnInit {
 
   // Take returned stat response and update the UI with the corresponding fields
   async fillPlayerStats(stats: any, player: any) {
+    //console.log("Before" + JSON.stringify(stats))
+    if (player.seasonType === "Playoffs") {
+      stats = this.calculatePlayoffAverages(stats);
+      console.log("After" + JSON.stringify(stats))
+    }
     if (player.identity === "1") {
       this.player1Stats = {
         gamesPlayed: stats.games_played,
@@ -62,9 +68,9 @@ export class PlayerStatsComponent implements OnInit {
         averageTurnovers: stats.turnover,
         averagePersonalFouls: stats.pf,
         averagePoints: stats.pts,
-        averageFieldGoalPercentage: stats.fg_pct * 100,
-        average3PointPercentage: stats.fg3_pct * 100,
-        averageFreeThrowPercentage: stats.ft_pct * 100,
+        averageFieldGoalPercentage: player.seasonType === "Regular" ? stats.fg_pct * 100 : stats.fg_pct,  //Fix for inconsistent api
+        average3PointPercentage: player.seasonType === "Regular" ? stats.fg3_pct * 100 : stats.fg3_pct,
+        averageFreeThrowPercentage: player.seasonType === "Regular" ? stats.ft_pct * 100 : stats.ft_pct,
         name: `${player.first_name} ${player.last_name}`
       }
     }
@@ -87,9 +93,9 @@ export class PlayerStatsComponent implements OnInit {
         averageTurnovers: stats.turnover,
         averagePersonalFouls: stats.pf,
         averagePoints: stats.pts,
-        averageFieldGoalPercentage: stats.fg_pct * 100,
-        average3PointPercentage: stats.fg3_pct * 100,
-        averageFreeThrowPercentage: stats.ft_pct * 100,
+        averageFieldGoalPercentage: player.seasonType === "Regular" ? stats.fg_pct * 100 : stats.fg_pct,  //Fix for inconsistent api
+        average3PointPercentage: player.seasonType === "Regular" ? stats.fg3_pct * 100 : stats.fg3_pct,
+        averageFreeThrowPercentage: player.seasonType === "Regular" ? stats.ft_pct * 100 : stats.ft_pct,
         name: `${player.first_name} ${player.last_name}`
       }
     }
@@ -97,6 +103,44 @@ export class PlayerStatsComponent implements OnInit {
 
   // Check to allow some html elements to be piped without error
   isNumber(val ?: number | string): boolean { return typeof val === 'number'; }
+
+  // There's no playoff averages endpoint so get the stats of the individual games and manually calculate
+  calculatePlayoffAverages(playoffStats : any) {
+    const gamesPlayed = playoffStats.length;
+    let playoffAverages = {
+      games_played : gamesPlayed, min: 0, fgm: 0, fga: 0, fg3m: 0, fg3a: 0, ftm: 0, fta: 0, oreb: 0, dreb: 0,
+      reb: 0, ast: 0, stl: 0, blk: 0, turnover: 0, pf: 0, pts: 0, fg_pct: 0, fg3_pct: 0, ft_pct: 0
+    }
+    // Gather totals for all stats
+    playoffStats.forEach((game : any) => {
+      // for (let [key, value] of Object.entries(playoffAverages)) {
+      //   value += game[value]
+      // }
+      //playoffAverages.min += game.min
+      playoffAverages.fgm += game.fgm
+      playoffAverages.fga += game.fga
+      playoffAverages.fg3m += game.fg3m
+      playoffAverages.fg3a += game.fg3a
+      playoffAverages.ftm += game.ftm
+      playoffAverages.fta += game.fta
+      playoffAverages.oreb += game.oreb
+      playoffAverages.dreb += game.dreb
+      playoffAverages.reb += game.reb
+      playoffAverages.ast += game.ast
+      playoffAverages.stl += game.stl
+      playoffAverages.blk += game.blk
+      playoffAverages.turnover += game.turnover
+      playoffAverages.pf += game.turnover
+      playoffAverages.pts += game.pts
+      playoffAverages.fg_pct += game.fg_pct
+      playoffAverages.fg3_pct += game.fg3_pct
+      playoffAverages.ft_pct += game.ft_pct
+    })
+    for (let [key, value] of Object.entries(playoffAverages)) {
+      value = value / gamesPlayed
+    }
+    return playoffAverages
+  }
 
   constructor() { }
 
