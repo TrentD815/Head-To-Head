@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PlayerStats} from "../player-stats";
+import {min} from "rxjs/operators";
 const axios = require('axios');
 
 @Component({
@@ -44,7 +45,6 @@ export class PlayerStatsComponent implements OnInit {
 
   // Take returned stat response and update the UI with the corresponding fields
   async fillPlayerStats(stats: any, player: any) {
-    //console.log("Before" + JSON.stringify(stats))
     if (player.seasonType === "Playoffs") {
       stats = this.calculatePlayoffAverages(stats);
       console.log("After" + JSON.stringify(stats))
@@ -107,41 +107,40 @@ export class PlayerStatsComponent implements OnInit {
   // There's no playoff averages endpoint so get the stats of the individual games and manually calculate
   calculatePlayoffAverages(playoffStats : any) {
     const gamesPlayed = playoffStats.length;
+
     let playoffAverages = {
       games_played : gamesPlayed, min: 0, fgm: 0, fga: 0, fg3m: 0, fg3a: 0, ftm: 0, fta: 0, oreb: 0, dreb: 0,
       reb: 0, ast: 0, stl: 0, blk: 0, turnover: 0, pf: 0, pts: 0, fg_pct: 0, fg3_pct: 0, ft_pct: 0
     }
+    // Return 0's if player was not in the playoffs for picked season
+    if (gamesPlayed === 0) {
+      return playoffAverages
+    }
     // Gather totals for all stats
     playoffStats.forEach((game : any) => {
-      // for (let [key, value] of Object.entries(playoffAverages)) {
-      //   value += game[value]
-      // }
-      //playoffAverages.min += game.min
-      playoffAverages.fgm += game.fgm
-      playoffAverages.fga += game.fga
-      playoffAverages.fg3m += game.fg3m
-      playoffAverages.fg3a += game.fg3a
-      playoffAverages.ftm += game.ftm
-      playoffAverages.fta += game.fta
-      playoffAverages.oreb += game.oreb
-      playoffAverages.dreb += game.dreb
-      playoffAverages.reb += game.reb
-      playoffAverages.ast += game.ast
-      playoffAverages.stl += game.stl
-      playoffAverages.blk += game.blk
-      playoffAverages.turnover += game.turnover
-      playoffAverages.pf += game.turnover
-      playoffAverages.pts += game.pts
-      playoffAverages.fg_pct += game.fg_pct
-      playoffAverages.fg3_pct += game.fg3_pct
-      playoffAverages.ft_pct += game.ft_pct
+      for (let [key, value] of Object.entries(game)) {
+        if (key === "min") {
+          value = this.convertMinutes(value);
+        }
+        // @ts-ignore
+        playoffAverages[key] += value;
+      }
     })
+    // Calculate average for each stat
     for (let [key, value] of Object.entries(playoffAverages)) {
-      value = value / gamesPlayed
+      value = value / gamesPlayed;
+      value = value.toFixed(2);
+      // @ts-ignore
+      playoffAverages[key] = value;
     }
-    return playoffAverages
+    playoffAverages.games_played = gamesPlayed
+    return playoffAverages;
   }
-
+  convertMinutes(minutesPlayed: any) {
+    minutesPlayed = minutesPlayed.replace(":", ".")
+    minutesPlayed = parseInt(minutesPlayed);
+    return minutesPlayed;
+  }
   constructor() { }
 
   // Run update stats every time there's an update to the profile
