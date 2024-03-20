@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {PlayerStats} from "../player-stats";
-import {min} from "rxjs/operators";
-const axios = require('axios');
+import { Component, Input, OnInit } from '@angular/core';
+import { PlayerStats } from "../player-stats";
+import axios from 'axios'
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'player-stats',
@@ -24,22 +24,23 @@ export class PlayerStatsComponent implements OnInit {
 
   // Get the players stats after the user searches for a player
   async getPlayerStats(player: any) {
-    let regular = `https://www.balldontlie.io/api/v1/season_averages?season=${player.year}&player_ids[]=${player.id}`;
-    let playoffs = `https://www.balldontlie.io/api/v1/stats?seasons[]=${player.year}&player_ids[]=${player.id}&postseason=true`;
+    let regular = `https://api.balldontlie.io/v1/season_averages?season=${player.year}&player_ids[]=${player.id}`;
+    let playoffs = `https://api.balldontlie.io/v1/stats?seasons[]=${player.year}&player_ids[]=${player.id}&postseason=true`;
     const config = {
       method: 'get',
       url: player.seasonType === "Regular" ? regular : playoffs,
-      headers: {}
+      headers: { 'Authorization': environment.API_KEY }
     };
 
     try {
-      let playerStatsResponse = await axios(config);
+      let playerStatsResponse = await axios.request(config);
       playerStatsResponse = player.seasonType === "Regular" ? playerStatsResponse.data.data[0] : playerStatsResponse.data.data
-      //console.log(playerStatsResponse)
+
       return playerStatsResponse;
     }
     catch (err) {
       console.error(err)
+      return {}
     }
   }
 

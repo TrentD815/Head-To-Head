@@ -1,11 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Observable} from 'rxjs';
-import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
-import {getColorFromURL} from 'color-thief-node';
-import {PlayerProfile} from '../player-profile';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { getColorFromURL } from 'color-thief-node';
+import { PlayerProfile } from '../player-profile';
 // @ts-ignore
-import {playerListImport} from 'src/app/player-profile/playerList.js';
+import { playerListImport } from 'src/app/player-profile/playerList.js';
 const axios = require('axios');
+import { environment } from 'src/environments/environment';
 
 type Player = string;
 const playerList: Player[] = playerListImport;
@@ -37,16 +38,18 @@ export class PlayerProfileComponent implements OnInit {
 
   // Get the players profile after the user searches for a player
   async getPlayerProfile(searchedPlayer : string) {
+    const splitName = searchedPlayer.split(' ')
+    const firstName = splitName[0]
+    const lastName = splitName[1]
     const config = {
       method: 'get',
-      url: `https://www.balldontlie.io/api/v1/players?search=${searchedPlayer}`,
-      headers: {}
+      url: `https://api.balldontlie.io/v1/players?first_name=${firstName}&last_name=${lastName}`,
+      headers: { 'Authorization': environment.API_KEY }
     };
     try {
       let playerProfileResponse = await axios(config);
       playerProfileResponse = playerProfileResponse.data.data[0];
       await this.fillPlayerProfile(playerProfileResponse);
-      //console.log(playerProfileResponse)
       return playerProfileResponse;
     }
     catch (err) {
@@ -65,8 +68,8 @@ export class PlayerProfileComponent implements OnInit {
       name: player.first_name + " " + player.last_name,
       team: player.team.full_name,
       position: this.convertPositionToFullName(player.position),
-      height: player.height_feet ? player.height_feet + "' " + player.height_inches + '"' : "Unknown",
-      weight: player.weight_pounds ? player.weight_pounds + " lbs" : "Unknown"
+      height: player.height ? player.height : "Unknown",
+      weight: player.weight ? player.weight + " lbs" : "Unknown"
     }
   }
 
@@ -143,8 +146,8 @@ export class PlayerProfileComponent implements OnInit {
     }
     this.seasonTypes = ["Regular", "Playoffs", "Career", "Career Regular", "Career Playoffs"]
     this.seasonType = "Regular";
-    this.years = ["21-22","20-21","19-20","18-19","17-18","16-17","15-16","14-15","13-14",
+    this.years = ["23-24","22-23","21-22","20-21","19-20","18-19","17-18","16-17","15-16","14-15","13-14",
       "12-13","11-12","10-11", "09-10","08-09","07-08","06-07","05-06","04-05","03-04","02-03"]
-    this.year = "2020"
+    this.year = "2023"
   }
 }
