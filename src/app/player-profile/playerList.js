@@ -1,5 +1,5 @@
 // A cache of all active NBA players to make player search auto filling possible
-export const playerListImport = ["Precious Achiuwa", "Jaylen Adams", "Steven Adams", "Bam Adebayo","LaMarcus Aldridge",
+export const playerListImport = ["DJ Carton", "Izaiah Brockington","Amari Bailey", "Precious Achiuwa", "Jaylen Adams", "Steven Adams", "Bam Adebayo","LaMarcus Aldridge",
   "Ty-Shon Alexander", "Nickeil Alexander-Walker", "Grayson Allen", "Jarrett Allen",
   "Al-Farouq Aminu", "Kyle Anderson","Giannis Antetokounmpo", "Kostas Antetokounmpo",
   "Thanasis Antetokounmpo", "Carmelo Anthony", "Cole Anthony", "OG Anunoby", "Ryan Arcidiacono",

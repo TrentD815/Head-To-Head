@@ -1,14 +1,10 @@
-<nav class="navbar navbar-expand-lg navbar-light container-fluid">
-  <a class="navbar-brand" href="#">Head To Head</a>
+<nav class="navbar navbar-expand-lg navbar-light">
+  <a class="navbar-brand" href="" [ngClass]="{'breakline-light': !this.isDarkTheme || false, 'breakline-dark': this.isDarkTheme}">Head To Head</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Home</a>
-      </li>
-    </ul>
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
   </div>
   <div class="light-or-dark-mode-container">
     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="yellow" class="bi bi-brightness-high m-2" viewBox="0 0 16 16">

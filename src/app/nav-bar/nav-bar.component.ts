@@ -7,7 +7,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
   @Output() themeSwitchEvent = new EventEmitter<boolean>();
-  isDarkTheme ?: boolean;
+  isDarkTheme ?: boolean = false
 
   constructor() {}
   ngOnInit(): void {}
