@@ -9,7 +9,13 @@
     <div class="col-4"></div>
       <div [ngClass]="{'card-light': !this.isDarkTheme, 'card-dark': this.isDarkTheme}" class="card-light raised col">
           <div class="card-header mb-0"><h4>Head To Head Stats</h4></div>
-          <player-stats [playerProfile]="playerProfile" class="col"></player-stats>
+        <div class="row stat-toggle-label-container">
+          <div class="form-check form-switch m-2">
+            <span class="stat-toggle-label">Highlight Stat Winner</span>
+            <input class="form-check-input" type="checkbox" (change)="toggleStatWinnerAndLoser(stat.checked)" #stat>
+          </div>
+        </div>
+          <player-stats [playerProfile]="playerProfile" [toggleStatsWinnerAndLoser]="this.toggleStatsWinnerAndLoser" class="col"></player-stats>
       </div>
       <div class="col-4"></div>
 <!--      <div [ngClass]="{'card-light': !this.isDarkTheme, 'card-dark': this.isDarkTheme}" class="card-light raised col">-->

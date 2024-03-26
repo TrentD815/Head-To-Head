@@ -122,6 +122,20 @@ body {
   background-image: linear-gradient(315deg, #7cffcb 0%, #74f2ce 74%);
   //border-radius: 1em;
 }
+.stat-equal {
+  background-color: transparent !important;
+  //border-radius: 1em;
+}
+// Align stat toggle button and label
+.stat-toggle-label {
+  margin-left: 1rem;
+}
+.stat-toggle-label-container {
+  justify-content: center;
+}
+.stat-toggle-label-container > * {
+  width: inherit;
+}
 .end {
   text-align: end;
   padding-right: 15px;

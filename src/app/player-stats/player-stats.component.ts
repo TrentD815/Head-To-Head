@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import { PlayerStats } from "../player-stats";
 import axios from 'axios'
 import { environment } from 'src/environments/environment';
@@ -11,8 +11,13 @@ import { environment } from 'src/environments/environment';
 export class PlayerStatsComponent implements OnInit {
   @Input() isDarkTheme ?: boolean;
   @Input() playerProfile ?: any;
+  @Input() toggleStatsWinnerAndLoser ?: boolean
   player1Stats ?: PlayerStats;
   player2Stats ?: PlayerStats;
+  isStatWinnerPlayer1 ?: boolean = undefined
+  isStatWinnerPlayer2 ?: boolean = undefined
+
+  constructor(private elem: ElementRef) { }
 
   // Initial function to start updating player stats
   async updatePlayerStats () {
@@ -35,7 +40,6 @@ export class PlayerStatsComponent implements OnInit {
     try {
       let playerStatsResponse = await axios.request(config);
       playerStatsResponse = player.seasonType === "Regular" ? playerStatsResponse.data.data[0] : playerStatsResponse.data.data
-
       return playerStatsResponse;
     }
     catch (err) {
@@ -48,7 +52,6 @@ export class PlayerStatsComponent implements OnInit {
   async fillPlayerStats(stats: any, player: any) {
     if (player.seasonType === "Playoffs") {
       stats = this.calculatePlayoffAverages(stats);
-      console.log("After" + JSON.stringify(stats))
     }
     if (player.identity === "1") {
       this.player1Stats = {
@@ -100,6 +103,20 @@ export class PlayerStatsComponent implements OnInit {
         name: `${player.first_name} ${player.last_name}`
       }
     }
+    this.setStatWinnerAndLoser()
+    // if (this.toggleStatsWinnerAndLoser) {
+    //   this.setStatWinnerAndLoser()
+    // }
+    // else {
+    //   const elements = document.querySelectorAll('.start, .end');
+    //   document.addEventListener('DOMContentLoaded', () => {
+    //     console.log("DOM content loaded")
+    //     elements.forEach(element => {
+    //       // Remove 'stat-winner' and 'stat-loser' classes from each element
+    //       element.classList.remove('stat-winner', 'stat-loser');
+    //     });
+    //   });
+    // }
   }
 
   // Check to allow some html elements to be piped without error
@@ -142,62 +159,75 @@ export class PlayerStatsComponent implements OnInit {
     minutesPlayed = parseInt(minutesPlayed);
     return minutesPlayed;
   }
-  constructor() { }
+
 
   // Run update stats every time there's an update to the profile
   ngOnChanges(): void {
     this.updatePlayerStats().catch(err => {console.log(err)})
   }
 
+  setStatWinnerAndLoser() {
+    // @ts-ignore
+    const keys = Object.keys(this.player1Stats);
+    const elements = document.querySelectorAll('.start, .end');
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log("DOM content loaded")
+      elements.forEach(element => {
+        // Remove 'stat-winner' and 'stat-loser' classes from each element
+        element.classList.remove('stat-winner', 'stat-loser');
+      });
+    });
+    for (let key of keys) {
+      // // @ts-ignore
+      // if (this.player1Stats[key] === '-') { return }
+      // // @ts-ignore
+      // if (this.player2Stats[key] === '-') { return }
+      // @ts-ignore
+      if (this.player1Stats[key] > this.player2Stats[key]) {
+
+        console.log("Player 1 stat is larger!")
+        // @ts-ignore
+        console.log("Comparison: ", this.player1Stats[key], this.player2Stats[key])
+        this.isStatWinnerPlayer1 = true
+        this.isStatWinnerPlayer2 = false
+      }
+      // @ts-ignore
+      else if (this.player1Stats[key] < this.player2Stats[key]) {
+        console.log("Player 2 stat is larger!")
+        // @ts-ignore
+        console.log("Comparison: ", this.player2Stats[key], this.player1Stats[key])
+        this.isStatWinnerPlayer1 = false
+        this.isStatWinnerPlayer2 = true
+      }
+      else {
+        console.log("Stats are equal!")
+      }
+    }
+  }
+
+  ngAfterViewInit() {
+    let rightSideStats = this.elem.nativeElement.querySelectorAll('.start');
+    console.log(rightSideStats)
+    let leftSideStats = this.elem.nativeElement.querySelectorAll('.end');
+    console.log(leftSideStats)
+  }
   // Initialize the stat board with empty values
   ngOnInit(): void {
       this.player1Stats = {
-        gamesPlayed: "-",
-        averageMinutesPlayed: "-",
-        averagePoints: "-",
-        averageAssists: "-",
-        averageRebounds: "-",
-        averageBlocks: "-",
-        averageSteals: "-",
-        averageFieldGoalsMade: "-",
-        averageFieldGoalsAttempted: "-",
-        averageFieldGoalPercentage: "-",
-        average3PointersMade: "-",
-        average3PointersAttempted: "-",
-        average3PointPercentage: "-",
-        averageFreeThrowsMade: "-",
-        averageFreeThrowsAttempted: "-",
-        averageFreeThrowPercentage: "-",
-        averageOffensiveRebounds: "-",
-        averageDefensiveRebounds: "-",
-        averageTurnovers: "-",
-        averagePersonalFouls: "-",
-        plusMinus: "-",
-        name: "-"
+        gamesPlayed: "-", averageMinutesPlayed: "-", averagePoints: "-", averageAssists: "-", averageRebounds: "-",
+        averageBlocks: "-", averageSteals: "-", averageFieldGoalsMade: "-", averageFieldGoalsAttempted: "-",
+        averageFieldGoalPercentage: "-", average3PointersMade: "-", average3PointersAttempted: "-",
+        average3PointPercentage: "-", averageFreeThrowsMade: "-", averageFreeThrowsAttempted: "-",
+        averageFreeThrowPercentage: "-", averageOffensiveRebounds: "-", averageDefensiveRebounds: "-",
+        averageTurnovers: "-", averagePersonalFouls: "-", plusMinus: "-", name: "-"
       }
       this.player2Stats = {
-        gamesPlayed: "-",
-        averageMinutesPlayed: "-",
-        averagePoints: "-",
-        averageAssists: "-",
-        averageRebounds: "-",
-        averageBlocks: "-",
-        averageSteals: "-",
-        averageFieldGoalsMade: "-",
-        averageFieldGoalsAttempted: "-",
-        averageFieldGoalPercentage: "-",
-        average3PointersMade: "-",
-        average3PointersAttempted: "-",
-        average3PointPercentage: "-",
-        averageFreeThrowsMade: "-",
-        averageFreeThrowsAttempted: "-",
-        averageFreeThrowPercentage: "-",
-        averageOffensiveRebounds: "-",
-        averageDefensiveRebounds: "-",
-        averageTurnovers: "-",
-        averagePersonalFouls: "-",
-        plusMinus: "-",
-        name: "-"
+        gamesPlayed: "-", averageMinutesPlayed: "-", averagePoints: "-", averageAssists: "-", averageRebounds: "-",
+        averageBlocks: "-", averageSteals: "-", averageFieldGoalsMade: "-", averageFieldGoalsAttempted: "-",
+        averageFieldGoalPercentage: "-", average3PointersMade: "-", average3PointersAttempted: "-",
+        average3PointPercentage: "-", averageFreeThrowsMade: "-", averageFreeThrowsAttempted: "-",
+        averageFreeThrowPercentage: "-", averageOffensiveRebounds: "-", averageDefensiveRebounds: "-",
+        averageTurnovers: "-", averagePersonalFouls: "-", plusMinus: "-", name: "-"
       }
   }
 }
