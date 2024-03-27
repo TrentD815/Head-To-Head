@@ -12,7 +12,7 @@
         <div class="row stat-toggle-label-container">
           <div class="form-check form-switch m-2">
             <span class="stat-toggle-label">Highlight Stat Winner</span>
-            <input class="form-check-input" type="checkbox" (change)="toggleStatWinnerAndLoser(stat.checked)" #stat>
+            <input class="form-check-input" type="checkbox" (change)="toggleStatWinnerAndLoser(stat.checked)" checked #stat>
           </div>
         </div>
           <player-stats [playerProfile]="playerProfile" [toggleStatsWinnerAndLoser]="this.toggleStatsWinnerAndLoser" class="col"></player-stats>

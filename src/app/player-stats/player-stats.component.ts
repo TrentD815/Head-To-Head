@@ -12,10 +12,11 @@ export class PlayerStatsComponent implements OnInit {
   @Input() isDarkTheme ?: boolean;
   @Input() playerProfile ?: any;
   @Input() toggleStatsWinnerAndLoser ?: boolean
-  player1Stats ?: PlayerStats;
-  player2Stats ?: PlayerStats;
-  isStatWinnerPlayer1 ?: boolean = undefined
-  isStatWinnerPlayer2 ?: boolean = undefined
+  player1Stats ?: PlayerStats
+  player2Stats ?: PlayerStats
+  isStatWinnerPlayer1: any
+  isStatWinnerPlayer2: any
+  protected readonly Object = Object;
 
   constructor(private elem: ElementRef) { }
 
@@ -167,42 +168,51 @@ export class PlayerStatsComponent implements OnInit {
   }
 
   setStatWinnerAndLoser() {
+    // Reset winner and loser object each search
+    this.isStatWinnerPlayer1 = []
+    this.isStatWinnerPlayer2 = []
+
+    // Remove 'stat-winner' and 'stat-loser' classes from each element
     // @ts-ignore
     const keys = Object.keys(this.player1Stats);
     const elements = document.querySelectorAll('.start, .end');
     document.addEventListener('DOMContentLoaded', () => {
       console.log("DOM content loaded")
       elements.forEach(element => {
-        // Remove 'stat-winner' and 'stat-loser' classes from each element
         element.classList.remove('stat-winner', 'stat-loser');
       });
     });
     for (let key of keys) {
-      // // @ts-ignore
-      // if (this.player1Stats[key] === '-') { return }
-      // // @ts-ignore
-      // if (this.player2Stats[key] === '-') { return }
+      // @ts-ignore
+      if (this.player1Stats[key] === '-' || this.player2Stats[key] === '-') { return }
+
+      // @ts-ignore
+      if (this.player1Stats[key] === 'name') return
       // @ts-ignore
       if (this.player1Stats[key] > this.player2Stats[key]) {
-
         console.log("Player 1 stat is larger!")
         // @ts-ignore
         console.log("Comparison: ", this.player1Stats[key], this.player2Stats[key])
-        this.isStatWinnerPlayer1 = true
-        this.isStatWinnerPlayer2 = false
+        this.isStatWinnerPlayer1[key] = true
+        this.isStatWinnerPlayer2[key] = false
       }
       // @ts-ignore
       else if (this.player1Stats[key] < this.player2Stats[key]) {
         console.log("Player 2 stat is larger!")
         // @ts-ignore
         console.log("Comparison: ", this.player2Stats[key], this.player1Stats[key])
-        this.isStatWinnerPlayer1 = false
-        this.isStatWinnerPlayer2 = true
+        this.isStatWinnerPlayer1[key] = false
+        this.isStatWinnerPlayer2[key] = true
       }
-      else {
+      // @ts-ignore
+      else if (this.player1Stats[key] === this.player2Stats[key]) {
         console.log("Stats are equal!")
       }
+      else {
+        console.log("Unable to compare stat")
+      }
     }
+    console.log(this.player1Stats, this.player2Stats)
   }
 
   ngAfterViewInit() {

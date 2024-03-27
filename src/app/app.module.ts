@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { PlayerProfileComponent } from './player-profile/player-profile.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { PlayerStatsComponent } from './player-stats/player-stats.component';
-import { StatNameComponent } from './stat-name/stat-name.component';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 
@@ -17,7 +16,6 @@ import { FooterComponent } from './footer/footer.component';
     PlayerProfileComponent,
     NavBarComponent,
     PlayerStatsComponent,
-    StatNameComponent,
     FooterComponent,
   ],
   imports: [
