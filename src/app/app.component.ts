@@ -9,7 +9,7 @@ export class AppComponent {
   title = 'Head-To-Head';
   isDarkTheme ?: boolean;
   playerProfile ?: any;
-  toggleStatsWinnerAndLoser ?: boolean
+  toggleStatsWinnerAndLoser ?: boolean = true
 
   receivePlayerProfileStatus($event: any) {
     this.playerProfile = $event;
@@ -17,7 +17,7 @@ export class AppComponent {
   receiveTheme($event: any) {
     this.isDarkTheme = $event;
   }
-  toggleStatWinnerAndLoser($event: any) {
+  receiveStatWinnerAndLoser($event: any) {
     this.toggleStatsWinnerAndLoser = $event
   }
 }

@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { PlayerStats } from "../player-stats";
 import axios from 'axios'
 import { environment } from 'src/environments/environment';
@@ -12,6 +12,7 @@ export class PlayerStatsComponent implements OnInit {
   @Input() isDarkTheme ?: boolean;
   @Input() playerProfile ?: any;
   @Input() toggleStatsWinnerAndLoser ?: boolean
+  @Output() highlightStatWinnerSwitchEvent = new EventEmitter<boolean>();
   player1Stats ?: PlayerStats
   player2Stats ?: PlayerStats
   isStatWinnerPlayer1: any
@@ -25,6 +26,7 @@ export class PlayerStatsComponent implements OnInit {
     if (this.playerProfile) {
       const playerStatsResponse = await this.getPlayerStats(this.playerProfile);
       await this.fillPlayerStats(playerStatsResponse, this.playerProfile);
+      this.setStatWinnerAndLoser()
     }
   }
 
@@ -104,20 +106,6 @@ export class PlayerStatsComponent implements OnInit {
         name: `${player.first_name} ${player.last_name}`
       }
     }
-    this.setStatWinnerAndLoser()
-    // if (this.toggleStatsWinnerAndLoser) {
-    //   this.setStatWinnerAndLoser()
-    // }
-    // else {
-    //   const elements = document.querySelectorAll('.start, .end');
-    //   document.addEventListener('DOMContentLoaded', () => {
-    //     console.log("DOM content loaded")
-    //     elements.forEach(element => {
-    //       // Remove 'stat-winner' and 'stat-loser' classes from each element
-    //       element.classList.remove('stat-winner', 'stat-loser');
-    //     });
-    //   });
-    // }
   }
 
   // Check to allow some html elements to be piped without error
@@ -161,27 +149,34 @@ export class PlayerStatsComponent implements OnInit {
     return minutesPlayed;
   }
 
-
   // Run update stats every time there's an update to the profile
   ngOnChanges(): void {
-    this.updatePlayerStats().catch(err => {console.log(err)})
-  }
-
-  setStatWinnerAndLoser() {
-    // Reset winner and loser object each search
-    this.isStatWinnerPlayer1 = []
-    this.isStatWinnerPlayer2 = []
-
-    // Remove 'stat-winner' and 'stat-loser' classes from each element
-    // @ts-ignore
-    const keys = Object.keys(this.player1Stats);
-    const elements = document.querySelectorAll('.start, .end');
-    document.addEventListener('DOMContentLoaded', () => {
-      console.log("DOM content loaded")
+    this.updatePlayerStats().catch(err => { console.log(err) })
+    if (this.toggleStatsWinnerAndLoser === false) {
+      console.log("Removing stat highlight", this.toggleStatsWinnerAndLoser)
+      const elements = document.querySelectorAll('.start, .end');
       elements.forEach(element => {
         element.classList.remove('stat-winner', 'stat-loser');
       });
-    });
+    }
+    else {
+      console.log("Turning stat winner back on", this.toggleStatsWinnerAndLoser)
+      // const elements = document.querySelectorAll('.start, .end');
+      // elements.forEach(element => {
+      //   element.classList.add('stat-winner');
+      // });
+      this.setStatWinnerAndLoser()
+    }
+  }
+
+  setStatWinnerAndLoser() {
+    if (this.toggleStatsWinnerAndLoser === false) return
+    if (!this.player1Stats || !this.player2Stats) return
+    // Reset winner and loser object each search
+    this.isStatWinnerPlayer1 = []
+    this.isStatWinnerPlayer2 = []
+    // @ts-ignore
+    const keys = Object.keys(this.player1Stats);
     for (let key of keys) {
       // @ts-ignore
       if (this.player1Stats[key] === '-' || this.player2Stats[key] === '-') { return }
@@ -190,36 +185,28 @@ export class PlayerStatsComponent implements OnInit {
       if (this.player1Stats[key] === 'name') return
       // @ts-ignore
       if (this.player1Stats[key] > this.player2Stats[key]) {
-        console.log("Player 1 stat is larger!")
-        // @ts-ignore
-        console.log("Comparison: ", this.player1Stats[key], this.player2Stats[key])
         this.isStatWinnerPlayer1[key] = true
         this.isStatWinnerPlayer2[key] = false
       }
       // @ts-ignore
       else if (this.player1Stats[key] < this.player2Stats[key]) {
-        console.log("Player 2 stat is larger!")
-        // @ts-ignore
-        console.log("Comparison: ", this.player2Stats[key], this.player1Stats[key])
         this.isStatWinnerPlayer1[key] = false
         this.isStatWinnerPlayer2[key] = true
       }
       // @ts-ignore
       else if (this.player1Stats[key] === this.player2Stats[key]) {
-        console.log("Stats are equal!")
+        this.isStatWinnerPlayer1[key] = true
+        this.isStatWinnerPlayer2[key] = true
       }
       else {
         console.log("Unable to compare stat")
       }
     }
-    console.log(this.player1Stats, this.player2Stats)
+    console.log(this.isStatWinnerPlayer1, this.isStatWinnerPlayer2)
   }
 
-  ngAfterViewInit() {
-    let rightSideStats = this.elem.nativeElement.querySelectorAll('.start');
-    console.log(rightSideStats)
-    let leftSideStats = this.elem.nativeElement.querySelectorAll('.end');
-    console.log(leftSideStats)
+  ngDoCheck() {
+
   }
   // Initialize the stat board with empty values
   ngOnInit(): void {
