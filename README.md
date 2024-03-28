@@ -1,6 +1,6 @@
 # Head To Head
 ## Overview
-  Head To Head is a simple interface where you can easily compare the stats of active NBA players. 
+  Head To Head is a simple interface where you can easily compare stats of active NBA players. 
   
 ## Features
   - Search stats for all 575+ active NBA players
@@ -27,9 +27,9 @@ may take a bit (10-20 seconds) in order to wake the server. After waking the ser
   NBA is not responsible for it. For more information, visit the NBA's website [here](https://www.nba.com/termsofuse)
 
 ## Gallery
-<img src="src/assets/Gallery/PlayerProfile.png" height=400 alt="Player Profile Example">
+<img src="./src/assets/Gallery/PlayerProfile.png" height=400 alt="Player Profile Example">
 <img src="./src/assets/Gallery/Stats.png" height=400 alt="Stats Example">
 <img src="./src/assets/Gallery/DarkTheme.png" height=400 alt="Dark Theme Example">
-<img class='justify-content-center' src="./src/assets/Gallery/MobileFriendly.png" height=400 alt="Mobile Friendly Example">
-<img class='justify-content-center' src="./src/assets/Gallery/MobileFriendlyStats.png" height=400 alt="Mobile Friendly Stats Example">
-<img class='justify-content-center' src="./src/assets/Gallery/AutoComplete.png" height=400 alt="Player Auto Complete Example">
+<img src="./src/assets/Gallery/MobileFriendly.png" height=400 alt="Mobile Friendly Example">
+<img src="./src/assets/Gallery/MobileFriendlyStats.png" height=400 alt="Mobile Friendly Stats Example">
+<img src="./src/assets/Gallery/AutoComplete.png" height=400 alt="Player Auto Complete Example">
