@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, filter, last, map} from 'rxjs/operators';
 import { getColorFromURL } from 'color-thief-node';
 import { PlayerProfile } from '../player-profile';
 // @ts-ignore
@@ -62,8 +62,14 @@ export class PlayerProfileComponent implements OnInit {
   async fillPlayerProfile(player:any) {
     const teamLogoFullName = player.team.full_name;
     const formattedTeamLogoSource = teamLogoFullName.split(" ").join("");
+    console.log(player.last_name)
+    let lastNameFormatted = player.last_name.split(" ").join("")
+    console.log(lastNameFormatted)
+    lastNameFormatted = lastNameFormatted.replace(/\./g, "");
+    console.log(lastNameFormatted)
+
     this.player = {
-      profilePicSource: `assets/Headshots/${player.first_name}${player.last_name}.png`,
+      profilePicSource: `assets/Headshots/${player.first_name}${lastNameFormatted}.png`,
       teamLogoSource: `/assets/Logos/${formattedTeamLogoSource}.svg`,
       name: player.first_name + " " + player.last_name,
       team: player.team.full_name,

@@ -3,7 +3,6 @@ const path = require('path');
 const app = express();
 const cors = require('cors')
 const port = process.env.PORT ? process.env.PORT : 8080;
-import { selectAndScrapeAllPlayers } from "./playerHeadshots";
 
 app.options('*', cors())
 app.use(async function(req, res, next) {

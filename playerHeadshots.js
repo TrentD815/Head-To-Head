@@ -69,3 +69,14 @@ async function downloadImage(imageUrl, imageName) {
     console.error(`Error downloading image for ${imageName}: ${error.message}`);
   }
 }
+
+// Grab all the file names and add them to an array
+async function retrieveFileNames() {
+  try {
+    const files = await fs.readdir(imageDirectory);
+    const fileNames = files.map(file => String(file));
+    console.log('File names:', fileNames);
+  } catch (error) {
+    console.error('Error reading files:', error);
+  }
+}
