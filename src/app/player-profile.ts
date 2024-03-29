@@ -7,4 +7,6 @@ export interface PlayerProfile {
   height ?: string;
   position ?: string;
   number ?: number;
+  college ?: string;
+  jerseyNumber ?: string;
 }

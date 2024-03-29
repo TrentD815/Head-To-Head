@@ -438,7 +438,7 @@ export const playerListImport = [
   "Nick Richards",
   "Nick Smith Jr",
   "Nicolas Batum",
-  "NikolaJ okic",
+  "Nikola Jokic",
   "Nikola Jovic",
   "Nikola Vucevic",
   "Noah Clowney",

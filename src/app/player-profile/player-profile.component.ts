@@ -75,7 +75,9 @@ export class PlayerProfileComponent implements OnInit {
       team: player.team.full_name,
       position: this.convertPositionToFullName(player.position),
       height: player.height ? player.height : "Unknown",
-      weight: player.weight ? player.weight + " lbs" : "Unknown"
+      weight: player.weight ? player.weight + " lbs" : "Unknown",
+      college: player.college,
+      jerseyNumber: player.jersey_number
     }
   }
 
@@ -138,6 +140,8 @@ export class PlayerProfileComponent implements OnInit {
         position: "Position",
         profilePicSource: "/assets/Headshots/NoPlayerDefault.png",
         teamLogoSource: "/assets/Logos/BasketballDefault.png",
+        college: "-",
+        jerseyNumber: "-"
       }
     } else {
       this.player = {
@@ -148,11 +152,13 @@ export class PlayerProfileComponent implements OnInit {
         position: "Position",
         profilePicSource: "assets/Headshots/NoPlayerDefault.png",
         teamLogoSource: "/assets/Logos/BasketballDefault.png",
+        college: "-",
+        jerseyNumber: "-"
       }
     }
-    this.seasonTypes = ["Regular", "Playoffs", "Career", "Career Regular", "Career Playoffs"]
+    this.seasonTypes = ["Regular", "Playoffs"]
     this.seasonType = "Regular";
-    this.years = ["23-24","22-23","21-22","20-21","19-20","18-19","17-18"]
+    this.years = ["23-24","22-23","21-22"]
     this.year = "2023"
   }
 }
